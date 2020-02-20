@@ -1,0 +1,23 @@
+{
+  "name": "blog-skeleton-v3",
+  "version": "1.0.0",
+  "description": "blog skeleton v3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "algolia": "atomic-algolia"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edward852/blog-skeleton-v3.git"
+  },
+  "author": "edward852",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edward852/blog-skeleton-v3/issues"
+  },
+  "homepage": "https://github.com/edward852/blog-skeleton-v3#readme",
+  "dependencies": {
+    "atomic-algolia": "^0.3.17"
+  }
+}

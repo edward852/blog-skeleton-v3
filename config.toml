@@ -201,7 +201,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   isHTML = false
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "Algolia"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
@@ -217,3 +217,13 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   [markup.tableOfContents]
     endLevel = 4
     startLevel = 1
+
+[outputFormats.Algolia]
+  baseName = "algolia"
+  isPlainText = true
+  mediaType = "application/json"
+  notAlternative = true
+
+[params.algolia]
+  vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+  params = ["categories", "tags"]

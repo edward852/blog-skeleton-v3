@@ -10,9 +10,11 @@ install:
 
 # Build the website
 script:
-  - yarn --version
-  - (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
+  - npm install
+  - (cd themes/even; git apply ../../theme.patch; cp ../../list.algolia.json layouts/_default/; yarn install; yarn build)
   - ./hugo
+  # ALGOLIA_ADMIN_KEY Set in travis-ci.org dashboard
+  - npm run algolia
 
 # Deploy to GitHub pages
 deploy:
