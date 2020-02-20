@@ -1,3 +1,105 @@
+diff --git a/layouts/partials/head.html b/layouts/partials/head.html
+index d602390..de83595 100644
+--- a/layouts/partials/head.html
++++ b/layouts/partials/head.html
+@@ -88,3 +88,39 @@
+   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+ <![endif]-->` | safeHTML }}
++
++
++{{- if .Site.Params.algolia.appId -}}
++<style>
++  .search-item {
++    display: inline-block;
++    margin-right: 10px;
++  }
++  .algolia-autocomplete {
++    width: 100%;
++  }
++  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
++    width: 100%;
++  }
++  .algolia-autocomplete .aa-hint {
++    color: #999;
++  }
++  .algolia-autocomplete .aa-dropdown-menu {
++    width: 100%;
++    background-color: #fff;
++    border: 1px solid #999;
++    border-top: none;
++  }
++  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
++    cursor: pointer;
++    padding: 5px 4px;
++  }
++  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
++    background-color: #B2D7FF;
++  }
++  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
++    font-weight: bold;
++    font-style: normal;
++  }
++</style>
++{{- end -}}
+\ No newline at end of file
+diff --git a/layouts/partials/header.html b/layouts/partials/header.html
+index 3592e88..931ac03 100644
+--- a/layouts/partials/header.html
++++ b/layouts/partials/header.html
+@@ -10,6 +10,12 @@
+ 
+ <nav class="site-navbar">
+   <ul id="menu" class="menu">
++    {{- if .Site.Params.algolia.appId -}}
++    <li class="search-item">
++      <input type="text" id="search-input" placeholder="Search" />
++    </li>
++    {{- end -}}
++
+     {{ range .Site.Menus.main -}}
+       <li class="menu-item">
+         <a class="menu-item-link" href="{{ .URL | safeURL }}">{{ .Name }}</a>
+diff --git a/layouts/partials/scripts.html b/layouts/partials/scripts.html
+index de35229..fad2d31 100644
+--- a/layouts/partials/scripts.html
++++ b/layouts/partials/scripts.html
+@@ -130,3 +130,34 @@
+ {{ range .Site.Params.customJS -}}
+   <script src="{{ "/js/" | relURL }}{{ . }}"></script>
+ {{ end }}
++
++{{- if .Site.Params.algolia.appId -}}
++<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
++<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
++<script>
++  var client = algoliasearch({{.Site.Params.algolia.appId}}, {{.Site.Params.algolia.searchOnlyKey}});
++  var index = client.initIndex({{.Site.Params.algolia.indexName}});
++  autocomplete('#search-input', { hint: false }, [
++    {
++      source: autocomplete.sources.hits(index, { hitsPerPage: 5 }),
++      displayKey: 'title',
++      templates: {
++        suggestion: function(suggestion) {
++          var url = suggestion._highlightResult.permalink.value;
++          var title = suggestion._highlightResult.title.value;
++          var elem = '<a href="' + url + '">' + title + '</a>';
++          return elem;
++        }
++      }
++    }
++  ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
++    console.log(event, suggestion, dataset, context);
++    // Do nothing on click, as the browser will already do it
++    if (context.selectionMethod === 'click') {
++      return;
++    }
++    // Change the page, for example, on other events
++    window.location.assign(suggestion.permalink)
++  });
++</script>
++{{ end }}
+\ No newline at end of file
 diff --git a/src/css/_partial/_post/_content.scss b/src/css/_partial/_post/_content.scss
 index 688a924..b21d3df 100644
 --- a/src/css/_partial/_post/_content.scss
