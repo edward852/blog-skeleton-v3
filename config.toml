@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://edward852.github.io/"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "时聆心语"
@@ -17,7 +17,7 @@ pygmentsCodefencesGuessSyntax = true
 hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
 paginate = 5                                              # 首页每页显示的文章数
 disqusShortname = ""      # disqus_shortname
-googleAnalytics = ""      # UA-XXXXXXXX-X
+googleAnalytics = "UA-158726365-1"      # UA-XXXXXXXX-X
 copyright = ""            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 [author]                  # essential                     # 必需
