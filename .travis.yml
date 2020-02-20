@@ -10,6 +10,8 @@ install:
 
 # Build the website
 script:
+  - yarn --version
+  - (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
   - ./hugo
 
 # Deploy to GitHub pages

@@ -1,0 +1,25 @@
+diff --git a/src/css/_partial/_post/_content.scss b/src/css/_partial/_post/_content.scss
+index 688a924..b21d3df 100644
+--- a/src/css/_partial/_post/_content.scss
++++ b/src/css/_partial/_post/_content.scss
+@@ -23,6 +23,7 @@
+         .icon-link {
+           visibility: hidden;
+           font-size: 16px;
++          display: contents;
+ 
+           &:before {
+             vertical-align: middle;
+diff --git a/src/css/_variables.scss b/src/css/_variables.scss
+index 8e1553b..f3e0e24 100644
+--- a/src/css/_variables.scss
++++ b/src/css/_variables.scss
+@@ -5,7 +5,7 @@
+ // ========== Theme Color ========== //
+ // Config here to change theme color
+ // Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
+-$theme-color-config: 'Default';
++$theme-color-config: 'Cobalt Blue';
+ 
+ // Default theme color map
+ $theme-color-map: (
