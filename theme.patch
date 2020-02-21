@@ -102,9 +102,9 @@ index de35229..d41a70c 100644
 +      displayKey: 'title',
 +      templates: {
 +        suggestion: function(suggestion) {
-+          var url = suggestion._highlightResult.permalink.value;
++          var url = suggestion.permalink;
 +          var title = suggestion._highlightResult.title.value;
-+          var elem = '<a href="' + url + '">' + title + '</a>';
++          var elem = '<a href="' + url + '" style="display:block;width:100%">' + title + '</a>';
 +          return elem;
 +        },
 +        footer: '<div class="algolia-docsearch-footer"><a class="algolia-docsearch-footer--logo" href="https://www.algolia.com/docsearch">Algolia</a></div>'
