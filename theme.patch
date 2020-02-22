@@ -42,7 +42,7 @@ index 3592e88..bf53d33 100644
        <li class="menu-item">
          <a class="menu-item-link" href="{{ .URL | safeURL }}">{{ .Name }}</a>
 diff --git a/layouts/partials/scripts.html b/layouts/partials/scripts.html
-index de35229..b31bbed 100644
+index de35229..9eb58e7 100644
 --- a/layouts/partials/scripts.html
 +++ b/layouts/partials/scripts.html
 @@ -130,3 +130,16 @@
@@ -54,9 +54,9 @@ index de35229..b31bbed 100644
 +<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 +<script>
 +  docsearch({
-+  apiKey: 'f0ec02ae89536c4ed404b8c52ca8e11b',
-+  indexName: 'blog',
-+  appId: 'Q02X4MC3P9',
++  apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
++  indexName: {{ .Site.Params.algolia.indexName }},
++  appId: {{ .Site.Params.algolia.appId }},
 +  inputSelector: '.docsearch-input',
 +  debug: false,
 +  });

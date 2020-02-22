@@ -225,8 +225,6 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   notAlternative = true
 
 [params.algolia]
-  vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
-  params = ["categories", "tags"]
   appId = "Q02X4MC3P9"
   indexName = "blog"
   searchOnlyKey = "f0ec02ae89536c4ed404b8c52ca8e11b"
