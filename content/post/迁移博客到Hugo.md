@@ -46,7 +46,7 @@ Hugo本身推荐了一些方法，本站采用 [Algolia](https://www.algolia.com
 - 上传索引文件  
   主要通过 [atomic-algolia](https://www.npmjs.com/package/atomic-algolia) 上传
 - 添加前端UI  
-  通过 [autocomplete.js](https://github.com/algolia/autocomplete.js) 生成界面
+  通过 [docsearch.min.js](https://github.com/algolia/docsearch) 生成界面
 
 # 杂项
 相对以前的博客，还有些新的小调整，修改 `config.toml` 文件即可。

@@ -11,73 +11,21 @@ index 171fe09..93ed7d3 100644
  </div>
  <script>
 diff --git a/layouts/partials/head.html b/layouts/partials/head.html
-index d602390..fa0b3ab 100644
+index d602390..89fc6d1 100644
 --- a/layouts/partials/head.html
 +++ b/layouts/partials/head.html
-@@ -88,3 +88,60 @@
+@@ -88,3 +88,8 @@
    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
  <![endif]-->` | safeHTML }}
 +
 +
 +{{- if .Site.Params.algolia.appId -}}
-+<style>
-+  .search-item {
-+    display: inline-block;
-+    margin-right: 10px;
-+  }
-+  .algolia-autocomplete {
-+    width: 100%;
-+  }
-+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-+    width: 100%;
-+  }
-+  .algolia-autocomplete .aa-hint {
-+    color: #999;
-+  }
-+  .algolia-autocomplete .aa-dropdown-menu {
-+    width: 100%;
-+    background-color: #fff;
-+    border: 1px solid #999;
-+    border-top: none;
-+  }
-+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-+    cursor: pointer;
-+    padding: 5px 4px;
-+  }
-+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-+    background-color: #B2D7FF;
-+  }
-+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-+    font-weight: bold;
-+    font-style: normal;
-+  }
-+  .algolia-autocomplete .algolia-docsearch-footer {
-+    width: 134px;
-+    height: 20px;
-+    z-index: 2000;
-+    margin-top: 10.66667px;
-+    float: right;
-+    font-size: 0;
-+    line-height: 0
-+  }
-+  .algolia-autocomplete .algolia-docsearch-footer--logo {
-+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTc4Ljk4OC45MzhoMTYuNTk0YTIuOTY4IDIuOTY4LjAgMDEyLjk2NiAyLjk2NlYyMC41YTIuOTY3IDIuOTY3LjAgMDEtMi45NjYgMi45NjRINzguOTg4QTIuOTY3IDIuOTY3LjAgMDE3Ni4wMjIgMjAuNVYzLjg5N0EyLjk2MSAyLjk2MS4wIDAxNzguOTg4LjkzOHptNDEuOTM3IDE3Ljg2NmMtNC4zODYuMDItNC4zODYtMy41NC00LjM4Ni00LjEwNmwtLjAwNy0xMy4zMzYgMi42NzUtLjQyNHYxMy4yNTRjMCAuMzIyLjAgMi4zNTggMS43MTggMi4zNjR2Mi4yNDh6bS0xMC44NDYtMi4xOGMuODIxLjAgMS40My0uMDQ3IDEuODU1LS4xMjl2LTIuNzE5YTYuMzM0IDYuMzM0LjAgMDAtMS41NzQtLjE5OSA1LjcgNS43LjAgMDAtLjg5Ny4wNjkgMi42OTkgMi42OTkuMCAwMC0uODE0LjI0Yy0uMjQuMTE2LS40MzkuMjgtLjU4Mi40OTEtLjE1LjIxMi0uMjE5LjMzNS0uMjE5LjY1Ni4wLjYyOC4yMTkuOTkxLjYxNiAxLjIzcy45MzguMzYyIDEuNjE1LjM2MnptLS4yMzMtOS43Yy44ODMuMCAxLjYyOS4xMDkgMi4yMzEuMzI4LjYwMi4yMTggMS4wODguNTI1IDEuNDQ0LjkxNS4zNjMuMzk2LjYwOS45MjIuNzYgMS40ODMuMTU3LjU2LjIzMiAxLjE3NS4yMzIgMS44NXY2Ljg3NGEzMi41IDMyLjUuMCAwMS0xLjg2OC4zMTRjLS44MzQuMTIzLTEuNzcyLjE4NS0yLjgxMy4xODUtLjY5LjAtMS4zMjctLjA2OS0xLjg5NS0uMTk4YTQuMDAxIDQuMDAxLjAgMDEtMS40NzEtLjYzNiAzLjA4NSAzLjA4NS4wIDAxLS45NTEtMS4xMzRjLS4yMjYtLjQ2NS0uMzQzLTEuMTItLjM0My0xLjgwMy4wLS42NTYuMTMtMS4wNzMuMzg0LTEuNTI1YTMuMjQgMy4yNC4wIDAxMS4wNDctMS4xMDZjLjQ0NS0uMjg3Ljk1LS40OTIgMS41MzItLjYxNWE4LjggOC44LjAgMDExLjgyLS4xODUgOC40MDQgOC40MDQuMCAwMTEuOTcyLjI0di0uNDM4YzAtLjMwNy0uMDM1LS42LS4xMS0uODc0YTEuODggMS44OC4wIDAwLS4zODQtLjczIDEuNzg0IDEuNzg0LjAgMDAtLjcyNC0uNDkzIDMuMTY0IDMuMTY0LjAgMDAtMS4xNDMtLjIwNWMtLjYxNi4wLTEuMTc3LjA3NS0xLjY5LjE2NGE3LjczNSA3LjczNS4wIDAwLTEuMjYuMzA3bC0uMzIxLTIuMTkyYy4zMzUtLjExNy44MzQtLjIzMyAxLjQ3OC0uMzQ5YTEwLjk4IDEwLjk4LjAgMDEyLjA3My0uMTc4em01Mi44NDIgOS42MjZjLjgyMi4wIDEuNDMtLjA0OCAxLjg1NC0uMTNWMTMuN2E2LjM0NyA2LjM0Ny4wIDAwLTEuNTc0LS4xOTljLS4yOTQuMC0uNTk1LjAyMS0uODk2LjA2OWEyLjcgMi43LjAgMDAtLjgxNC4yNCAxLjQ2IDEuNDYuMCAwMC0uNTgyLjQ5MWMtLjE1LjIxMi0uMjE4LjMzNS0uMjE4LjY1Ni4wLjYyOC4yMTguOTkxLjYxNSAxLjIzLjQwNC4yNDUuOTM4LjM2MiAxLjYxNS4zNjJ6bS0uMjI2LTkuNjk0Yy44ODMuMCAxLjYyOS4xMDggMi4yMzEuMzI3czEuMDg4LjUyNiAxLjQ0NC45MTVjLjM1NS4zOS42MDkuOTIzLjc1OSAxLjQ4M2E2LjggNi44LjAgMDEuMjMzIDEuODUydjYuODczYy0uNDEuMDg4LTEuMDM0LjE5LTEuODY4LjMxNC0uODM0LjEyMy0xLjc3Mi4xODQtMi44MTMuMTg0LS42OS4wLTEuMzI3LS4wNjgtMS44OTUtLjE5OGE0LjAwMSA0LjAwMS4wIDAxLTEuNDcxLS42MzUgMy4wODUgMy4wODUuMCAwMS0uOTUxLTEuMTM0Yy0uMjI2LS40NjUtLjM0My0xLjEyLS4zNDMtMS44MDQuMC0uNjU2LjEzLTEuMDczLjM4NC0xLjUyNC4yNi0uNDUuNjA4LS44MiAxLjA0Ny0xLjEwNy40NDUtLjI4Ni45NS0uNDkxIDEuNTMyLS42MTRhOC44MDMgOC44MDMuMCAwMTIuNzUxLS4xM2MuMzI5LjAzNC42NzEuMDk2IDEuMDQuMTg1di0uNDM3YTMuMyAzLjMuMCAwMC0uMTA5LS44NzUgMS44NzMgMS44NzMuMCAwMC0uMzg0LS43MzEgMS43ODQgMS43ODQuMCAwMC0uNzI0LS40OTIgMy4xNjUgMy4xNjUuMCAwMC0xLjE0My0uMjA1Yy0uNjE2LjAtMS4xNzcuMDc1LTEuNjkuMTY0YTcuNzUgNy43NS4wIDAwLTEuMjYuMzA3bC0uMzIxLTIuMTkzYy4zMzUtLjExNi44MzQtLjIzMiAxLjQ3OC0uMzQ4YTExLjYzMyAxMS42MzMuMCAwMTIuMDczLS4xNzd6bS04LjAzNC0xLjI3MWExLjYyNiAxLjYyNi4wIDAxLTEuNjI4LTEuNjJjMC0uODk1LjcyNS0xLjYyIDEuNjI4LTEuNjIuOTA0LjAgMS42My43MjUgMS42MyAxLjYycy0uNzMzIDEuNjItMS42MyAxLjYyem0xLjM0OCAxMy4yMmgtMi42ODlWNy4yN2wyLjY5LS40MjN2MTEuOTU2em0tNC43MTQuMGMtNC4zODYuMDItNC4zODYtMy41NC00LjM4Ni00LjEwN2wtLjAwOC0xMy4zMzYgMi42NzYtLjQyNHYxMy4yNTRjMCAuMzIyLjAgMi4zNTggMS43MTggMi4zNjR2Mi4yNDh6bS04LjY5OC01LjkwM2MwLTEuMTU2LS4yNTMtMi4xMTktLjc0Ni0yLjc4OC0uNDkzLS42NzctMS4xODMtMS4wMS0yLjA2Ny0xLjAxLS44ODIuMC0xLjU3NC4zMzMtMi4wNjUgMS4wMS0uNDkzLjY3Ni0uNzMzIDEuNjMyLS43MzMgMi43ODguMCAxLjE2OC4yNDYgMS45NTMuNzQgMi42My40OTIuNjgzIDEuMTgzIDEuMDE4IDIuMDY2IDEuMDE4Ljg4Mi4wIDEuNTc0LS4zNDIgMi4wNjctMS4wMTkuNDkyLS42ODMuNzM4LTEuNDYuNzM4LTIuNjN6bTIuNzM3LS4wMDdjMCAuOTAyLS4xMyAxLjU4NC0uMzk3IDIuMzNhNS41MiA1LjUyLjAgMDEtMS4xMjggMS45MDYgNC45ODYgNC45ODYuMCAwMS0xLjc1MiAxLjIyM2MtLjY4NS4yODYtMS43MzkuNDUtMi4yNjUuNDUtLjUyOC0uMDA2LTEuNTc0LS4xNTctMi4yNTItLjQ1YTUuMDk2IDUuMDk2LjAgMDEtMS43NDQtMS4yMjNjLS40ODctLjUyNy0uODYzLTEuMTYyLTEuMTM3LTEuOTA2YTYuMzQ1IDYuMzQ1LjAgMDEtLjQxLTIuMzNjMC0uOTAyLjEyMy0xLjc3LjM5Ny0yLjUwOGE1LjU1NCA1LjU1NC4wIDAxMS4xNS0xLjg5MiA1LjEzMyA1LjEzMy4wIDAxMS43NS0xLjIxNmMuNjc5LS4yODcgMS40MjUtLjQyMyAyLjIzMi0uNDIzLjgwOC4wIDEuNTUzLjE0MiAyLjIzNy40MjNhNC44OCA0Ljg4LjAgMDExLjc1MyAxLjIxNiA1LjY0NCA1LjY0NC4wIDAxMS4xMzUgMS44OTJjLjI4Ny43MzguNDMxIDEuNjA2LjQzMSAyLjUwOHptLTIwLjEzOC4wYzAgMS4xMi4yNDYgMi4zNjMuNzM4IDIuODgyLjQ5My41MiAxLjEzLjc4IDEuOTEuNzguNDI0LjAuODI4LS4wNjIgMS4yMDQtLjE3OC4zNzctLjExNi42NzctLjI1My45MTctLjQxN1Y5LjMzYTEwLjQ3NiAxMC40NzYuMCAwMC0xLjc2Ni0uMjI2Yy0uOTcxLS4wMjgtMS43MS4zNy0yLjIzIDEuMDA0LS41MTMuNjM2LS43NzMgMS43NS0uNzczIDIuNzg4em03LjQzOCA1LjI3NGMwIDEuODI0LS40NjYgMy4xNTYtMS40MDQgNC4wMDQtLjkzNi44NDYtMi4zNjcgMS4yNy00LjI5NiAxLjI3LS43MDUuMC0yLjE3LS4xMzctMy4zNC0uMzk2bC40MzEtMi4xMThjLjk4LjIwNSAyLjI3Mi4yNiAyLjk1LjI2IDEuMDc0LjAgMS44NC0uMjE5IDIuMjk5LS42NTYuNDU5LS40MzcuNjg0LTEuMDg2LjY4NC0xLjk0OHYtLjQzN2E4LjA3IDguMDcuMCAwMS0xLjA0Ny4zOTdjLS40My4xMy0uOTMuMTk4LTEuNDkyLjE5OC0uNzM5LjAtMS40MS0uMTE2LTIuMDE4LS4zNDlhNC4yMDYgNC4yMDYuMCAwMS0xLjU2Ny0xLjAyNWMtLjQzMS0uNDUtLjc3NC0xLjAxNy0xLjAxMy0xLjY5NC0uMjQtLjY3Ny0uMzYzLTEuODg1LS4zNjMtMi43NzMuMC0uODM0LjEzLTEuODguMzg0LTIuNTc3LjI2LS42OTYuNjI5LTEuMjk4IDEuMTI5LTEuNzk2LjQ5My0uNDk4IDEuMDk1LS44ODEgMS44LTEuMTYyYTYuNjA1IDYuNjA1LjAgMDEyLjQyOC0uNDU3Yy44Ny4wIDEuNjcuMTA5IDIuNDUuMjQuNzguMTI5IDEuNDQ0LjI2NSAxLjk4NS40MTVWMTguMTd6IiBmaWxsPSIjNTQ2OGZmIi8+PHBhdGggZD0iTTYuOTcyIDYuNjc3djEuNjI3Yy0uNzEyLS40NDYtMS41Mi0uNjctMi40MjUtLjY3LS41ODUuMC0xLjA0NS4xMy0xLjM4LjM5MWExLjI0IDEuMjQuMCAwMC0uNTAyIDEuMDNjMCAuNDI1LjE2NC43NjUuNDk0IDEuMDIuMzMuMjU2LjgzNS41MzIgMS41MTYuODMuNDQ3LjE5Mi43OTUuMzU2IDEuMDQ1LjQ5NS4yNS4xMzguNTM3LjMzMi44NjIuNTgyLjMyNC4yNS41NjMuNTQ4LjcxOC44OTQuMTU0LjM0NS4yMy43NDEuMjMgMS4xODguMC45NDctLjMzNCAxLjY5MS0xLjAwNCAyLjIzNC0uNjcuNTQyLTEuNTM3LjgxNC0yLjYwMS44MTQtMS4xOC4wLTIuMTYtLjIyOS0yLjkzNi0uNjg2di0xLjcwOGMuODQuNjI4IDEuODE0Ljk0MiAyLjkyLjk0Mi41ODUuMCAxLjA0OC0uMTM2IDEuMzg4LS40MDdzLjUxLS42NDYuNTEtMS4xMjVjMC0uMjg3LS4xLS41NS0uMzAyLS43OS0uMjAzLS4yNC0uNDItLjQyLS42NTUtLjU0Mi0uMjM0LS4xMjMtLjU4NS0uMjktMS4wNTMtLjUwM2E2MS4yNyA2MS4yNy4wIDAxLS41ODItLjI3MSAxMy42NyAxMy42Ny4wIDAxLS41NS0uMjg3IDQuMjc1IDQuMjc1LjAgMDEtLjU2Ny0uMzUxIDYuOTIgNi45Mi4wIDAxLS40NTUtLjRjLS4xOC0uMTctLjMxLS4zNC0uMzktLjUxcy0uMTU1LS4zNy0uMjI0LS41OThhMi41NTMgMi41NTMuMCAwMS0uMTA0LS43NDJjMC0uOTE1LjMzMy0xLjYzOC45OTgtMi4xNy42NjQtLjUzMiAxLjUyMy0uNzk4IDIuNTc2LS43OTguOTY4LjAgMS43OTMuMTcgMi40NzMuNTF6bTcuNDY4IDUuNjk2di0uMjg3Yy0uMDIyLS42MDctLjE4Ny0xLjA4OC0uNDk1LTEuNDQ0LS4zMDktLjM1Ny0uNzUtLjUzNS0xLjMyNC0uNTM1LS41MzIuMC0uOTkuMTk0LTEuMzczLjU4My0uMzgyLjM4OC0uNjIyLjk0OS0uNzE3IDEuNjgzaDMuOTA5em0xLjAwNSAyLjc5MnYxLjQwNGMtLjU5Ni4zNC0xLjM4My41MS0yLjM2Mi41MS0xLjI1NS4wLTIuMjU1LS4zNzctMy0xLjEzMi0uNzQ0LS43NTUtMS4xMTYtMS43NDQtMS4xMTYtMi45NjguMC0xLjI5Ny4zNC0yLjMxNiAxLjAyMS0zLjA1NS42OC0uNzQgMS41NDgtMS4xMSAyLjYtMS4xMSAxLjAzMy4wIDEuODUyLjMyMyAyLjQ1OC45NjYuNjA2LjY0NC45MSAxLjU3Mi45MSAyLjc4NC4wLjMzLS4wMzMuNjc2LS4wOTYgMS4wMzhoLTUuMzE0Yy4xMDcuNzAyLjQwNSAxLjIzOS44OTQgMS42MTEuNDkuMzcyIDEuMTA2LjU1OCAxLjg1LjU1OC44NjIuMCAxLjU4LS4yMDIgMi4xNTUtLjYwNnptNi42MDUtMS43N2gtMS4yMTJjLS41OTYuMC0xLjA0NS4xMTYtMS4zNDkuMzUtLjMwMy4yMzQtLjQ1NC41MzItLjQ1NC44OTQuMC4zNzIuMTE3LjY2NC4zNS44NzcuMjM1LjIxMy41NzUuMzIgMS4wMjIuMzIuNTEuMC45MTItLjE0MiAxLjIwNC0uNDI0LjI5My0uMjgxLjQ0LS42NTEuNDQtMS4xMDh2LS45MXptLTQuMDY4LTIuNTU0VjkuMzI1Yy42MjctLjM2MSAxLjQ1Ny0uNTQyIDIuNDg5LS41NDIgMi4xMTYuMCAzLjE3NSAxLjAyNiAzLjE3NSAzLjA4VjE3aC0xLjU0OHYtLjk1N2MtLjQxNS42OC0xLjE0MyAxLjAyLTIuMTg2IDEuMDItLjc2Ni4wLTEuMzgtLjIyLTEuODQzLS42NjEtLjQ2Mi0uNDQyLS42OTQtMS4wMDMtLjY5NC0xLjY4NC4wLS43NzYuMjkzLTEuMzguODc4LTEuODEuNTg1LS40MzEgMS40MDQtLjY0NyAyLjQ1Ny0uNjQ3aDEuMzRWMTEuOGMwLS41NTQtLjEzMy0uOTcxLS4zOTktMS4yNTNzLS43MDctLjQyMy0xLjMyNC0uNDIzYTQuMDcgNC4wNy4wIDAwLTIuMzQ1LjcxOHptOS4zMzMtMS45M3YxLjQyYy4zOTQtMSAxLjEwMS0xLjUgMi4xMjMtMS41LjE0OC4wLjMxMy4wMTYuNDk0LjA0OHYxLjUzMWExLjg4NSAxLjg4NS4wIDAwLS43NS0uMTQzYy0uNTQyLjAtLjk4OS4yNC0xLjM0LjcxOC0uMzUxLjQ3OS0uNTI3IDEuMDQ4LS41MjcgMS43MDdWMTdoLTEuNTYzVjguOTFoMS41NjN6bTUuMDEgNC4wODRjLjAyMi44Mi4yNzIgMS40OTIuNzUgMi4wMTkuNDc5LjUyNiAxLjE1Ljc5IDIuMDEuNzkuNjM5LjAgMS4yMzUtLjE3NiAxLjc4OC0uNTI3djEuNDA0Yy0uNTIxLjMxOS0xLjE4Ni40NzktMS45OTUuNDc5LTEuMjY1LjAtMi4yNzYtLjQtMy4wMzEtMS4xOTctLjc1NS0uNzk4LTEuMTMzLTEuNzkyLTEuMTMzLTIuOTg0LjAtMS4xNi4zOC0yLjE1MSAxLjE0LTIuOTc1Ljc2MS0uODI1IDEuNzktMS4yMzcgMy4wODgtMS4yMzcuNzAyLjAgMS4zNDYuMTQ5IDEuOTMuNDQ3djEuNDM2YTMuMjQyIDMuMjQyLjAgMDAtMS43Ny0uNDk1Yy0uODQuMC0xLjUxMy4yNjYtMi4wMTkuNzk4LS41MDUuNTMyLS43NTggMS4yMTMtLjc1OCAyLjA0MnpNNDAuMjQgNS43MnY0LjU3OWMuNDU4LTEgMS4yOTMtMS41IDIuNTA1LTEuNS43ODcuMCAxLjQyLjI0NSAxLjg5OS43MzQuNDc5LjQ5LjcxOCAxLjE3LjcxOCAyLjA0MlYxN2gtMS41NjR2LTUuMTA2YzAtLjU1My0uMTQtLjk4LS40MjItMS4yODQtLjI4Mi0uMzAzLS42NTItLjQ1NS0xLjExLS40NTUtLjUzMS4wLTEuMDAyLjIwMi0xLjQxMS42MDYtLjQxLjQwNS0uNjE1IDEuMDIyLS42MTUgMS44NTFWMTdoLTEuNTYzVjUuNzJoMS41NjN6bTE0Ljk2NiAxMC4wMmMuNTk2LjAgMS4wOTYtLjI1MyAxLjUtLjc1OC40MDQtLjUwNi42MDYtMS4xNTcuNjA2LTEuOTU1LjAtLjkxNS0uMjAyLTEuNjItLjYwNi0yLjExNC0uNDA0LS40OTUtLjkyLS43NDItMS41NDgtLjc0Mi0uNTUzLjAtMS4wNS4yMjQtMS40OTEuNjctLjQ0Mi40NDctLjY2MiAxLjEzMy0uNjYyIDIuMDU4LjAuOTU4LjIxMiAxLjY3LjYzOCAyLjEzOC40MjUuNDY5Ljk0Ni43MDMgMS41NjMuNzAzek01My4wMDQgNS43MnY0LjQyYy41NzQtLjg5NCAxLjM4OC0xLjM0MSAyLjQ0LTEuMzQxIDEuMDIyLjAgMS44NTcuMzgzIDIuNTA2IDEuMTQ5LjY0OS43NjYuOTczIDEuNzgxLjk3MyAzLjA0Ny4wIDEuMTM4LS4zMDkgMi4xMDktLjkyNSAyLjkxMi0uNjE3LjgwMy0xLjQ2MyAxLjIwNS0yLjUzNyAxLjIwNS0xLjA3NS4wLTEuODk0LS40NDctMi40NTctMS4zNFYxN2gtMS41OFY1LjcyaDEuNTh6bTkuOTA4IDExLjEwNC0zLjIyMy03LjkxM2gxLjczOWwxLjAwNSAyLjYzMiAxLjI2IDMuNDE1Yy4wOTYtLjMyLjQ4LTEuNDU4IDEuMTUtMy40MTVsLjkwOS0yLjYzMmgxLjY2bC0yLjkyIDcuODY2Yy0uNzc3IDIuMDc0LTEuOTYzIDMuMTEtMy41NTkgMy4xMWEyLjkyIDIuOTIuMCAwMS0uNzM0LS4wNzl2LTEuMzRjLjE3LjA0Mi4zNTEuMDY0LjU0My4wNjQgMS4wMzIuMCAxLjc1NS0uNTcgMi4xNy0xLjcwOHoiIGZpbGw9IiM1ZDY0OTQiLz48cGF0aCBkPSJNODkuNjMyIDUuOTY3di0uNzcyYS45NzguOTc4LjAgMDAtLjk3OC0uOTc3aC0yLjI4YS45NzguOTc4LjAgMDAtLjk3OC45Nzd2Ljc5M2MwIC4wODguMDgyLjE1LjE3MS4xM2E3LjEyNyA3LjEyNy4wIDAxMS45ODQtLjI4Yy42NS4wIDEuMjk1LjA4OCAxLjkxNy4yNTkuMDgyLjAyLjE2NC0uMDQuMTY0LS4xM20tNi4yNDggMS4wMS0uMzktLjM4OWEuOTc3Ljk3Ny4wIDAwLTEuMzgyLjBsLS40NjUuNDY1YS45NzMuOTczLjAgMDAwIDEuMzhsLjM4My4zODNjLjA2Mi4wNjEuMTUuMDQ3LjIwNS0uMDE0LjIyNi0uMzA3LjQ3Mi0uNjAxLjc0Ni0uODc0LjI4MS0uMjguNTY4LS41MjYuODgzLS43NTEuMDY4LS4wNDIuMDc1LS4xMzcuMDItLjJtNC4xNiAyLjQ1M3YzLjM0MWMwIC4wOTYuMTA0LjE2NS4xOTIuMTE3bDIuOTctMS41MzdjLjA2OC0uMDM0LjA4OS0uMTE3LjA1NS0uMTg0YTMuNjk1IDMuNjk1LjAgMDAtMy4wOC0xLjg2NmMtLjA2OC4wLS4xMzYuMDU0LS4xMzYuMTNtMCA4LjA0OGE0LjQ4OSA0LjQ4OS4wIDAxLTQuNDktNC40ODIgNC40ODggNC40ODguMCAwMTQuNDktNC40ODIgNC40ODggNC40ODguMCAwMTQuNDg5IDQuNDgyIDQuNDg0IDQuNDg0LjAgMDEtNC40OSA0LjQ4Mm0wLTEwLjg1YTYuMzYzIDYuMzYzLjAgMTAwIDEyLjcyOSA2LjM3IDYuMzcuMCAwMDYuMzcyLTYuMzY4IDYuMzU4IDYuMzU4LjAgMDAtNi4zNzEtNi4zNiIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=);
-+    background-repeat: no-repeat;
-+    background-position: 50%;
-+    background-size: 100%;
-+    overflow: hidden;
-+    text-indent: -9000px;
-+    padding: 0!important;
-+    width: 100%;
-+    height: 100%;
-+    display: block;
-+  }
-+</style>
++<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 +{{- end -}}
 \ No newline at end of file
 diff --git a/layouts/partials/header.html b/layouts/partials/header.html
-index 3592e88..931ac03 100644
+index 3592e88..bf53d33 100644
 --- a/layouts/partials/header.html
 +++ b/layouts/partials/header.html
 @@ -10,6 +10,12 @@
@@ -85,8 +33,8 @@ index 3592e88..931ac03 100644
  <nav class="site-navbar">
    <ul id="menu" class="menu">
 +    {{- if .Site.Params.algolia.appId -}}
-+    <li class="search-item">
-+      <input type="text" id="search-input" placeholder="Search" />
++    <li style="display:inline-block;margin-right:10px;">
++      <input type="search" class="docsearch-input" placeholder="Search" />
 +    </li>
 +    {{- end -}}
 +
@@ -94,42 +42,23 @@ index 3592e88..931ac03 100644
        <li class="menu-item">
          <a class="menu-item-link" href="{{ .URL | safeURL }}">{{ .Name }}</a>
 diff --git a/layouts/partials/scripts.html b/layouts/partials/scripts.html
-index de35229..d41a70c 100644
+index de35229..b31bbed 100644
 --- a/layouts/partials/scripts.html
 +++ b/layouts/partials/scripts.html
-@@ -130,3 +130,35 @@
+@@ -130,3 +130,16 @@
  {{ range .Site.Params.customJS -}}
    <script src="{{ "/js/" | relURL }}{{ . }}"></script>
  {{ end }}
 +
 +{{- if .Site.Params.algolia.appId -}}
-+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
++<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 +<script>
-+  var client = algoliasearch({{.Site.Params.algolia.appId}}, {{.Site.Params.algolia.searchOnlyKey}});
-+  var index = client.initIndex({{.Site.Params.algolia.indexName}});
-+  autocomplete('#search-input', { hint: false }, [
-+    {
-+      source: autocomplete.sources.hits(index, { hitsPerPage: 5 }),
-+      displayKey: 'title',
-+      templates: {
-+        suggestion: function(suggestion) {
-+          var url = suggestion.permalink;
-+          var title = suggestion._highlightResult.title.value;
-+          var elem = '<a href="' + url + '" style="display:block;width:100%">' + title + '</a>';
-+          return elem;
-+        },
-+        footer: '<div class="algolia-docsearch-footer"><a class="algolia-docsearch-footer--logo" href="https://www.algolia.com/docsearch">Algolia</a></div>'
-+      }
-+    }
-+  ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-+    console.log(event, suggestion, dataset, context);
-+    // Do nothing on click, as the browser will already do it
-+    if (context.selectionMethod === 'click') {
-+      return;
-+    }
-+    // Change the page, for example, on other events
-+    window.location.assign(suggestion.permalink)
++  docsearch({
++  apiKey: 'f0ec02ae89536c4ed404b8c52ca8e11b',
++  indexName: 'blog',
++  appId: 'Q02X4MC3P9',
++  inputSelector: '.docsearch-input',
++  debug: false,
 +  });
 +</script>
 +{{ end }}
