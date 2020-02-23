@@ -1,7 +1,7 @@
 ---
 title: "迁移博客到Hugo"
 date: 2020-02-21T11:58:18+08:00
-lastmod: 2020-02-21T11:58:18+08:00
+lastmod: 2020-02-23T19:10:18+08:00
 draft: false
 tags: ["blog", "Hugo", "Travis CI", "Markdown", "Netlify", "Algolia"]
 categories: ["essay", "CI"]
@@ -47,6 +47,8 @@ Hugo本身推荐了一些方法，本站采用 [Algolia](https://www.algolia.com
   主要通过 [atomic-algolia](https://www.npmjs.com/package/atomic-algolia) 上传
 - 添加前端UI  
   通过 [docsearch.min.js](https://github.com/algolia/docsearch) 生成界面
+
+具体可以参考 [Hugo添加Algolia搜索支持](/post/hugo添加algolia搜索支持) 的说明。  
 
 # 杂项
 相对以前的博客，还有些新的小调整，修改 `config.toml` 文件即可。
