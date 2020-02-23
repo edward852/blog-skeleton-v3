@@ -136,7 +136,7 @@ mathjax: false
   ```go
   {{- if .Site.Params.algolia.appId -}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-  {{- end -}
+  {{- end -}}
   ```
 
 - 引入JS文件并初始化  
@@ -153,7 +153,7 @@ mathjax: false
       debug: false,
       });
   </script>
-  {{ end }}
+  {{- end -}}
   ```
 
 - 添加搜索框入口  
@@ -163,7 +163,7 @@ mathjax: false
     <li style="display:inline-block;margin-right:10px;">
       <input type="search" class="docsearch-input" placeholder="Search" />
     </li>
-  {{- end -}
+  {{- end -}}
   ```
   主要是添加 `<input>` 元素，`<li>` 元素根据各自主题的情况确定是否添加。  
   另外注意外层如果有 `overflow:hidden` 的CSS样式，可能会导致搜索结果框显示不了。:sweat_smile:   
