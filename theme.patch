@@ -19,7 +19,7 @@ index d602390..89fc6d1 100644
    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
  <![endif]-->` | safeHTML }}
 +
-+
++<meta name="google-site-verification" content="XhUaVuJqE2hOm0c6SPvXq3P1Lh8hLLGdQYr7wES3bcQ" />
 +{{- if .Site.Params.algolia.appId -}}
 +<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 +{{- end -}}
