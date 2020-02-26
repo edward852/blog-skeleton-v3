@@ -1,6 +1,7 @@
 ---
 title: "MySQL基础"
 date: 2017-10-13T14:54:28+08:00
+lastmod: 2020-02-26T14:54:28+08:00
 draft: false
 tags: ["mysql", "sql"]
 categories: ["language", "database"]
@@ -78,6 +79,8 @@ CREATE TABLE Persons
     );
 ```
 
+另外通过 `SHOW CREATE TABLE` 命令可以显示创建表的语句。  
+
 ## 删除
 
 DROP TABLE语句可用于删除表。
@@ -129,6 +132,7 @@ SELECT LastName,FirstName FROM Persons;
 ``` {.sql org-language="sqlite"}
 SELECT * FROM Persons;
 ```
+另外在字段比较多的时候，可以加上 `\G` 按列显示。  
 
 # 修改数据
 
@@ -266,4 +270,19 @@ UNION用于合并多个SELECT语句的结果集。\
 ``` {.sql org-language="sqlite"}
 SELECT Name FROM Employees_China
     UNION SELECT Name FROM Employees_USA；
+```
+
+# 授权
+```sql
+grant privileges on 库名.表名 to '用户名'@'远端服务器域名或IP' IDENTIFIED BY '密码';
+grant all privileges on *.* to '用户名'@'%' identified by '密码';
+
+flush privileges;
+```
+授权可以通过 `grant privileges` 命令操作，一般建议细粒度授权，具体到用户、表名等。  
+
+# 导出、导入
+```sql
+mysqldump --all-databases > mysql_dump.sql
+mysql < mysql_dump.sql
 ```
