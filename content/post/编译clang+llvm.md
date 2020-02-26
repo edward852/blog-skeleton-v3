@@ -8,7 +8,7 @@ categories: ["tool"]
 mathjax: false
 ---
 
-本文主要介绍如果编译安装clang+llvm。  
+本文主要介绍如何编译安装clang+llvm。  
 <!--more-->
 
 # 预编译二进制文件
