@@ -12,21 +12,21 @@ mathjax: false
 <!--more-->
 
 # 生成密钥对
-```
+```sh
 ssh-keygen -t rsa
 ```
 默认密钥文件名 `id_rsa` , 可以指定其他名字，不过后续ssh的时候需要加上 `-i` 选项。  
 `passphrase` 留空即可，否则ssh的时候还需要输入passphrase。  
 
 # 添加公钥到服务器
-```
+```sh
 ssh-copy-id -i ~/.ssh/id_rsa.pub 用户名@服务器IP地址
 ```
 这一步主要是把上一步生成的公钥加入到服务器的 `authorized_keys` 文件中。  
 公钥文件名一般就是上一步指定的密钥文件名基础上再加 `.pub` 。  
 
 # 登录服务器
-```
+```sh
 ssh 用户名@服务器IP地址
 ssh -i 密钥文件路径 用户名@服务器IP地址 
 ```

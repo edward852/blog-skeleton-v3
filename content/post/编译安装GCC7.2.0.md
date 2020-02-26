@@ -23,7 +23,7 @@ mathjax: false
 
 - 自动下载  
   如果可以访问外网，那么可以直接通过GCC源码包中内置的脚本下载。  
-  ```
+  ```sh
   cd gcc-7.2.0
   ./contrib/download_prerequisites
   ```
@@ -31,7 +31,7 @@ mathjax: false
 - 手动下载  
   如果不方便访问外网，那么可以在通外网的机器上先下载好依赖包。  
   具体依赖哪些包、什么版本，可以参考上面提到的内置脚本。  
-  ```
+  ```sh
   cd gcc-7.2.0
   # 把gmp-6.1.0, mpfr-3.1.4, mpc-1.0.3, isl-0.16.1压缩包解压到该目录
   ln -fs gmp-6.1.0 gmp
@@ -41,7 +41,7 @@ mathjax: false
   ```
 
 # 编译安装
-```
+```sh
 ./configure --prefix=/usr/local/gcc-7.2.0 --enable-checking=release --enable-languages=c,c++ --disable-multilib
 make -j$(nproc)
 sudo make install
@@ -50,7 +50,7 @@ sudo make install
 另外不建议安装在旧版本GCC的目录，避免产生不必要的影响。  
 
 # 设置环境变量PATH
-```
+```sh
 export PATH=/usr/local/gcc-7.2.0/bin:$PATH
 ```
 设置PATH环境变量，优先选择高版本的GCC，需要的话可以加到 `~/.bashrc` 或者 `~/.bash_profile` 里面。  
