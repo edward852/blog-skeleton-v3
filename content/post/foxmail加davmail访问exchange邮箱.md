@@ -1,17 +1,20 @@
 ---
-title: "Foxmail加DavMail访问Exchange邮箱"
+title: "Foxmail+DavMail访问Exchange邮箱"
 date: 2017-09-07T21:17:28+08:00
+lastmod: 2020-02-28T11:13:28+08:00
 draft: false
-toc: true
 tags: ["foxmail", "davmail", "exchange"]
 categories: ["mail"]
+aliases: ["/posts/2017/09/foxmail加davmail访问exchange邮箱/"]
 ---
 
-由于公司邮箱服务器改用Exchange，而Windows XP的Outlook实在太卡，所以只能寻找替代方案。
+由于公司邮箱服务器改用Exchange，而Outlook实在太卡、Foxmail报RPC错误，所以只能寻找替代方案。
 <!--more-->
 方案一是Thunderbird+ExQuilla插件，效果差强人意，比Outlook要好一点。  
 方案一还有个缺点就是ExQuilla插件只能免费使用一段时间，之后每年都需要购买license。。。  
-另外就是更新Foxmail到支持Exchange的版本，不过实测还是不行(可能跟邮箱服务器设置有关)。  
+
+尝试更新Foxmail到支持Exchange的版本，还是会报RPC错误(可能跟邮箱服务器设置有关)。  
+
 后面在网上经过一番查找，终于找到了方案二：Foxmail+DavMail。  
 Foxmail并不是必要的，任何其他支持POP、IMAP、SMTP的邮箱客户端都可以。  
 方案二的核心是DavMail，作为中介连接邮箱客户端和邮箱服务器。  
