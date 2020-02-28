@@ -35,7 +35,7 @@ OK，如果没问题，那么我们就可以从以下途径购买了：
 AC86U可以刷梅林固件，然后在软件中心离线安装 [科学上网](https://github.com/hq450/fancyss_history_package/tree/master/fancyss_hnd) 软件。  
 
 ## oculus app安装、运行
-等设备到手之后，我们就可以下载手机端 `oculus` 软件来激活设备。  
+等设备到手之后，我们就可以下载手机端 `Oculus` 软件来激活设备。  
 android需要科学上网下载，而ios需要国外apple id才能下载。  
 如果不会弄，也可以关注"虚幻岛"公众号下载安装。  
 

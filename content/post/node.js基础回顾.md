@@ -1,6 +1,7 @@
 ---
-title: "Node.js基础回顾"
+title: "Node.js基础"
 date: 2017-09-18T14:16:28+08:00
+lastmod: 2020-02-28T14:05:28+08:00
 draft: false
 tags: ["node.js", "npm"]
 categories: ["language"]
@@ -10,9 +11,16 @@ categories: ["language"]
 [html-minifier](https://www.npmjs.com/package/html-minifier) 。
 <!--more-->
 
-要使用html-minifier首先要安装Node.js，然后再通过npm安装模块。\
-不同平台安装Node.js都比较简单，按照官网下载页面上说的做就好了。\
-Node.js我个人的使用感受是Windows上比较慢、问题较多，而Linux和Mac上比较快、问题较少。
+要使用html-minifier首先要安装Node.js，然后再通过npm安装。  
+
+# node安装
+不同平台安装Node.js都比较简单，到 [官网下载页](https://nodejs.org/en/download) 下载相应版本即可。  
+macOS建议下载、安装 `.pkg` 格式的安装包。  
+linux把压缩包直接解压到 `/usr/local` 即可。  
+```sh
+tar -C /usr/local/ --strip-components=1 -xf node-*.tar.xz
+```
+Node.js我个人的使用感受是Windows上比较慢、问题较多，而Linux和Mac上比较快、问题较少。  
 
 # npm与cnpm
 
