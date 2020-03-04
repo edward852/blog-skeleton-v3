@@ -23,7 +23,7 @@ mathjax: false
 
 - elpa镜像  
   在 [这里](https://github.com/syl20bnr/spacemacs-elpa-mirror/archive/master.zip) 下载压缩包。  
-- 下载spacemacs  
+- spacemacs  
   下载 [稳定版](https://github.com/syl20bnr/spacemacs/archive/master.zip) 或者 [开发版](https://github.com/syl20bnr/spacemacs/archive/develop.zip) 压缩包。  
 
 # 安装
