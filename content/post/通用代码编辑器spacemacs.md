@@ -1,6 +1,7 @@
 ---
 title: "通用代码编辑器Spacemacs"
 date: 2018-03-24T22:15:28+08:00
+lastmod: 2020-03-04T22:15:28+08:00
 draft: false
 tags: ["spacemacs", "emacs", "vim"]
 categories: ["ide", "coding"]
@@ -19,12 +20,13 @@ Insight对于广大人群来讲更加简单、好用，但是熟悉spacemacs后�
 
 ## Emacs
 
-spacemacs是对Emacs的扩展，所以要求先安装24.4版本以上的Emacs。比较简单，不赘述。
+spacemacs是对Emacs的扩展，所以要求先安装24.4版本以上的Emacs。  
+可以参考 [安装emacs](/post/编译安装emacs/) 的说明操作。  
 
 ## 默认安装
 
-按照 [官方说明](https://github.com/syl20bnr/spacemacs#install)
-安装即可，基本上只要把代码clone下来后重新打开Emacs就可以自动完成后续操作。
+按照 [官方说明](https://github.com/syl20bnr/spacemacs#install) 安装即可，基本上只要把代码clone下来后重新打开Emacs就可以自动完成后续操作。  
+如果有离线安装需求的话，可以参考 [spacemacs离线安装](/post/spacemacs离线安装/) 的说明操作。  
 
 # 新手指引
 

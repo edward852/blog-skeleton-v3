@@ -1,8 +1,8 @@
 ---
-title: "编译安装emacs"
+title: "CentOS 8编译安装emacs 26.3"
 date: 2018-12-23T23:34:28+08:00
 lastmod: 2018-12-23T23:34:28+08:00
-draft: true
+draft: false
 tags: ["emacs"]
 categories: ["tool"]
 mathjax: false
@@ -11,24 +11,27 @@ mathjax: false
 本文主要介绍如何编译、安装Emacs 26.3，以CentOS 8为例。  
 <!--more-->
 
+# Windows和MacOS
+Windows直接在 [附近镜像源](http://ftpmirror.gnu.org/emacs/windows) 下载编译好的版本。  
+MacOS通过 [brew](https://brew.sh) 安装即可：  
+```sh
+brew cask install emacs
+```
+Linux系统参考下文从源码编译安装。  
+
 # 下载源码
-[Emacs 26.3](https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.xz)
+在 [附近镜像源](http://ftpmirror.gnu.org/emacs/) 下载emacs的源代码，本文是26.3版本。  
 
 # 安装依赖
 ```sh
-yum install -y gtk3-devel
-yum install -y gnutls
+yum install -y gtk3-devel gnutls-devel
+yum install -y libXpm-devel libpng-devel libtiff-devel libjpeg-devel
+yum install -y ncurses-devel gpm-devel
 
-yum install -y gtk+-devel gtk2-devel
-yum install -y libXpm-devel
-yum install -y libpng-devel
-yum install -y giflib-devel
-yum install -y libtiff-devel libjpeg-devel
-yum install -y ncurses-devel
-yum install -y gpm-devel dbus-devel dbus-glib-devel dbus-python
-yum install -y GConf2-devel pkgconfig
-yum install -y libXft-devel
+#yum install -y giflib-devel
+dnf --enablerepo=PowerTools install -y giflib-devel
 ```
+`giflib-devel` 可能yum安装不了，可以通过dnf安装。  
 
 # 编译安装
 ```sh
@@ -38,26 +41,3 @@ make -j$(nproc)
 sudo make install
 ```
 
-# spacemacs依赖包缺失
-- 本地镜像  
-  https://github.com/syl20bnr/spacemacs-elpa-mirror
-- 国内镜像源  
-  https://mirrors.cloud.tencent.com/elpa
-
-```lisp
-(setq configuration-layer-elpa-archives
-    '(
-      ("melpa-lc"  . "~/elpa_local/melpa/")
-      ("org-lc"    . "~/elpa_local/org/")
-      ("gnu-lc"    . "~/elpa_local/gnu/")
-      
-      ("melpa"   . "https://mirrors.cloud.tencent.com/elpa/melpa/")
-      ("org"     . "https://mirrors.cloud.tencent.com/elpa/org/")
-      ("gnu"     . "https://mirrors.cloud.tencent.com/elpa/gnu/")
-     ))
-```
-
-另外如果是离线安装，那么可以把触发 `git clone` 的package加到 `dotspacemacs-excluded-packages`：  
-```lisp
-dotspacemacs-excluded-packages '(font-lock+ evil-unimpaired)
-```

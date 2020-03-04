@@ -1,7 +1,7 @@
 ---
 title: "通过vnc控制linux开发机"
 date: 2018-10-20T16:32:58+08:00
-lastmod: 2018-10-20T16:32:58+08:00
+lastmod: 2020-03-04T16:32:58+08:00
 draft: false
 tags: ["vnc"]
 categories: ["tool"]
@@ -11,7 +11,7 @@ mathjax: false
 本文主要介绍如何通过 `vnc` 控制linux开发机。  
 <!--more-->
 
-下文以CentOS为例进行说明，其他系统可以参考一下。  
+下文以CentOS 7为例进行说明，其他系统可以参考一下。  
 
 # 安装图形界面
 一般来说开发机默认没有图形界面，主要通过命令行操作。  
@@ -42,13 +42,19 @@ yum install -y tigervnc-server
   PIDFile=/home/edward/.vnc/%H%i.pid
   ```
   `-geometry` 选项可以指定分辨率。  
+- 设置防火墙  
+  放开vnc监听的端口，允许外部连接。  
+  ```sh
+  firewall-cmd --permanent --add-service vnc-server
+  systemctl restart firewalld
+  ```
 - 启用vnc服务  
   ```sh
   systemctl daemon-reload
   systemctl start vncserver@:1.service
   systemctl status vncserver@:1.service
   ```
-  这一步检查vnc服务启用是否正常并尝试连接(可以看 [连接](#connect) 章节)。  
+  这一步检查vnc服务启用是否正常并尝试连接(可以看 [连接](#connect) 章节)，正常则跳下一步。  
   如果你跟我一样装的是Xfce，而且连接不正常，那么先停止vnc服务:  
   ```sh
   systemctl stop vncserver@:1.service
@@ -66,11 +72,11 @@ yum install -y tigervnc-server
   ```
 
 # 安装vnc viewer
-在 [这里](https://www.realvnc.com/en/connect/download/viewer) 下载 `vnc viewer`， 最好选绿色版，否则有些公司的安全软件会告警。  
+在 [这里](https://www.realvnc.com/en/connect/download/viewer) 下载 `vnc viewer`， 最好选绿色版，否则有些公司的安全(监控)软件会告警。  
 
 # 安装noVNC(可选)
 安装 [noVNC](https://github.com/novnc/noVNC)，可以通过浏览器控制你的开发机。  
-为什么要通过浏览器？因为vnc的管理端口`5901`有可能被公司封堵了。  
+为什么要通过浏览器？因为vnc的监听端口`5901`有可能被公司封堵了。  
 一般来说Web端口还是放开的，比如说 `80, 8080, 8081` 等。  
 
 - 启动noVNC  
