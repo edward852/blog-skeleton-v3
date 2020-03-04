@@ -27,12 +27,14 @@ mathjax: false
   下载 [稳定版](https://github.com/syl20bnr/spacemacs/archive/master.zip) 或者 [开发版](https://github.com/syl20bnr/spacemacs/archive/develop.zip) 压缩包。  
 
 # 安装
+注意：如果是Windows电脑，请先设置 `HOME` 环境变量指定用户home目录(等同于 `~/`)。  
 在访问不了外网的电脑上进行如下操作：  
 
 - 备份或删除  
   如果Emacs没什么重要配置，那么可以删掉 `.emacs.d` 和 `.emacs` 。  
   ```sh
-  cd ~
+  # 进入home目录
+  cd ~/
   mv .emacs.d .emacs.d.bak
   mv .emacs .emacs.bak
   ```
@@ -48,6 +50,7 @@ mathjax: false
   ```
   elpa_local目录下有 `gnu`, `melpa`, `org` 等文件夹。  
   稳定版压缩包名字应该是 `spacemacs-master.zip` ，相应调整即可。  
+  Windows用户类似处理，解压到之前 `HOME` 环境变量指定的目录(等同于 `~/`)。  
 - 启动Emacs  
   启动Emacs之后，默认回车两次即可，接着安装package但是会报错，不用管先关闭Emacs。  
 - 修改 `.spacemacs` 文件  
@@ -72,6 +75,9 @@ mathjax: false
   dotspacemacs-excluded-packages '(font-lock+ evil-textobj-line)
   ```
 以上步骤都没问题的话，那么spacemacs就已经安装好了，可以尽情享用~ :tada:  
+
+# 问题排查
+如果还有其他问题，可以通过 `emacs --debug-init` 启动Emacs进行调试。  
 
 # 后记
 如果你们公司有elpa镜像源的话就更好了，以腾讯软件源为例，参考以下内容修改即可。  

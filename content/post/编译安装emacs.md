@@ -1,7 +1,7 @@
 ---
 title: "CentOS 8编译安装emacs 26.3"
-date: 2018-12-23T23:34:28+08:00
-lastmod: 2018-12-23T23:34:28+08:00
+date: 2020-03-03T23:34:28+08:00
+lastmod: 2020-03-03T23:34:28+08:00
 draft: false
 tags: ["emacs"]
 categories: ["tool"]
