@@ -1,6 +1,7 @@
 ---
 title: "C++基础"
 date: 2018-03-06T16:19:28+08:00
+lastmod: 2020-03-05T16:19:28+08:00
 draft: false
 tags: ["cpp"]
 categories: ["language"]
@@ -67,14 +68,14 @@ using namespace std::cout;
 ```
 
 # 输入/输出
-
-C++使用"流"来输入输出。\
-通过\<\<插入数据到流中。\
-通过\>\>从流中提取数据。\
-cin、cout、和cerr分别对应stdin(标准输入)、stdout(标准输出)和stderr(标准错误)。\
+C++使用"流"来输入输出。  
+通过`<<`输入数据到流中。  
+通过`>>`从流中输出数据。  
+cin、cout、和cerr分别对应stdin(标准输入)、stdout(标准输出)和stderr(标准错误)。  
 
 ```cpp
-#include <iostream> // 引入输入/输出流的头文件
+#include <iostream> // 引入输入/输出流的头文件uint64_t在32位使用%llu，在64位使用%lu打印
+C99还可以使用PRIu64打印uint64
 
 using namespace std; // 引入std命名空间中的符号，包括cin、cout等
 
@@ -91,18 +92,23 @@ int main()
 }
 ```
 
-如果需要实现类似于printf这样控制宽度、精度、对齐、进制(base)的效果，有两种选择：
+如果需要实现类似于printf这样控制宽度、精度、对齐、进制(base)的效果，有两种选择：  
+- 引入cstdio头文件使用printf函数  
+- 通过 [`ios_base类`](http://www.cplusplus.com/reference/ios/ios_base/) 进行设置  
 
--   引入cstdio头文件使用printf函数
--   通过
-    [`ios_base类`](http://www.cplusplus.com/reference/ios/ios_base/)
-    进行设置
+uint64_t打印在32位平台使用%llu，在64位平台使用%lu。  
+支持C99标准的话可以使用PRIu64打印。  
+```cpp
+uint64_t u64 = 100;
+printf("u64: %"PRIu64"\n", u64);
+```
 
 # 字符串
 
-C++中的字符串是string类，提供比char \*更好的封装与功能。\
-可以使用+或者+=拼接字符串(通过运算符重载实现)。\
-`to_string` 可以将常见类型转换为string类型。
+## string
+C++中的字符串是string类，提供比char *更好的封装与功能。  
+可以使用+或者+=拼接字符串(通过运算符重载实现)。  
+`to_string` 可以将常见类型转换为string类型。  
 
 ```cpp
 #include <string>
@@ -116,6 +122,7 @@ cout << strHello + strWorld; // "Hello World"
 cout << strHello + " You";
 ```
 
+## wstring
 对于非英文字符串应该使用wstring存储，比如说中文。\
 string虽然也可以存储，但实际上是以char作为字符单元，类似计算长度、反转等操作结果并不正确。
 
@@ -136,6 +143,15 @@ int main() {
     return 0;
 }
 ```
+
+## stringstream
+如果有比较多的拼接操作，那么可以考虑使用stringstream提高效率。  
+```cpp
+std::stringstream ss;
+ss << "Your age is " << 28;
+cout << ss.str() << endl;
+```
+注意清除内容不是`.clear()` 而是 `.str("")` 。  
 
 # 引用
 
@@ -370,6 +386,22 @@ void OwnedDog::print() const
 }
 ```
 
+## 静态成员变量
+```cpp
+// .h
+class IpUtils
+{
+    ...
+    static const size_t IPV6_ADDR_SIZE = 16;
+    static const size_t IPV4_ADDR_SIZE = 4;
+    ...
+};
+
+// .cpp
+const size_t IpUtils::IPV6_ADDR_SIZE;
+const size_t IpUtils::IPV4_ADDR_SIZE;
+```
+
 # 模板
 
 C++模板主要用于泛型编程。
@@ -444,7 +476,7 @@ printMessage<10>();  // Prints "Learn C++ faster in only 10 minutes!"
 ```
 
 # 异常处理
-
+## try catch
 ```cpp
 // 在try代码块中拋出的异常可以被随后的catch捕获。
 try {
@@ -463,6 +495,25 @@ catch (...)
     throw; // 重新拋出异常
 }
 
+```
+try catch不能捕获SEGV错误，需要注册相应信号处理器。  
+
+## goto 或 do while(0)
+C风格处理出错情况。  
+```cpp
+do
+{
+    if (出错)
+    {
+        设置flag;
+        break;
+    }
+} while (0);
+
+if (flag)
+{
+    错误处理;
+}
 ```
 
 # RAII
@@ -569,6 +620,29 @@ void doSomethingWithAFile(const std::string& filename)
 
 ```
 
+
+# 单例模式
+```cpp
+// works for c++11(or later standard) only!
+class SingletonCfg {
+public:
+    static SingletonCfg& getInst()
+    {
+        // c++11(or later standard) ensure thread-safe static local initialization
+        static SingletonCfg s;
+
+        return s;
+    }
+    void display();
+
+private:
+    SingletonCfg();
+    SingletonCfg(const SingletonCfg &);             // do not implement
+    SingletonCfg& operator=(const SingletonCfg &);  // do not implement
+
+};
+```
+
 # 杂项Misc
 
 ## 函数重载
@@ -595,9 +669,9 @@ int main()
 ```
 
 ## 参数默认值设置
-
-可以为函数的参数指定默认值，在调用者没有提供相应参数时按照默认值调用。\
-具有默认值的参数必须放在所有的常规参数之后。
+可以为函数的参数指定默认值，在调用者没有提供相应参数时按照默认值调用。  
+具有默认值的参数必须放在所有的常规参数之后。  
+一般在声明的时候指定默认值。  
 
 ```cpp
 void doSomethingWithInts(int a = 1, int b = 4)
@@ -622,7 +696,6 @@ int main()
 在C++中使用nullptr代替C语言中的NULL。
 
 ## 严格原型
-
 ```cpp
 // C++的函数原型与函数定义是严格匹配的
 void func(); // 这个函数不能接受任何参数
@@ -630,9 +703,33 @@ void func(); // 这个函数不能接受任何参数
 // 而在C语言中
 void func(); // 这个函数能接受任意数量的参数
 ```
+## extern "C"
+可以实现C与C++混合编程。  
 
-# C++新特性
+C++支持函数重载，底层实现函数名带有参数信息，而C不支持重载。  
+加上 `extern "C"` 编译器才能把C与C++代码链接在一起。  
+```cpp
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-C++语言也在不停地发展，比如说C++11引入了许多有用的新特性，可以留意相关的博文。
+// 正式定义。。。
+
+#ifdef __cplusplus
+}
+#endif
+```
 
 # STL
+## 容器
+### vector
+动态数组。  
+删除元素是erase+remove。  
+```cpp
+v.erase(remove(v.begin(), v.end(), val))
+```
+
+## 算法
+
+# 参考链接
+- [C++ Reference](http://www.cplusplus.com/reference/)
