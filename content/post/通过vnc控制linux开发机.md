@@ -46,7 +46,7 @@ yum install -y tigervnc-server
   放开vnc监听的端口，允许外部连接。  
   ```sh
   firewall-cmd --permanent --add-service vnc-server
-  systemctl restart firewalld
+  firewall-cmd --reload
   ```
 - 启用vnc服务  
   ```sh
