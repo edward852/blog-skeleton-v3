@@ -22,8 +22,7 @@ git init
 git add .
 git commit -m "svn迁移到git"
 git remote add origin git仓库路径
-git push -u origin --all
-git push origin --tags
+git push -u origin master
 ```
 
 ## 保留历史记录
@@ -44,6 +43,13 @@ git svn clone svn仓库路径 本地文件夹名 -T trunk/modX -b branches/modX 
 # 非标准布局，且没有branches、tags
 git svn clone svn仓库路径 本地文件夹名 --no-metadata
 ```
+通过 `git log` 查看提交者信息，如果不对则参考 [FAQ](#faq) 处理。  
+后续就是推送到git仓库即可：  
+```sh
+git remote add origin git仓库路径
+git push -u origin --all
+git push origin --tags
+```
 
 # FAQ
 - svn external怎么处理？  
@@ -53,6 +59,7 @@ git svn clone svn仓库路径 本地文件夹名 --no-metadata
   # 注意带--recursive参数才能把submodule代码一并拉取
   git clone --recursive git仓库路径
   ```
+
 - 提交者的信息不对怎么处理？  
   git svn clone时通过 `--authors-prog` 参数指定转换脚本。示例脚本如下：  
   ```sh
