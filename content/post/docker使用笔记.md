@@ -2,7 +2,7 @@
 title: "Docker使用笔记"
 date: 2020-01-09T11:05:00+08:00
 lastmod: 2020-01-09T11:05:00+08:00
-draft: true
+draft: false
 tags: ["docker"]
 categories: ["note"]
 mathjax: false
@@ -14,33 +14,38 @@ mathjax: false
 # 安装
 可以访问外网的话，参考 [官网](https://hub.docker.com/search?q=&type=edition&offering=community) 对应系统安装的说明操作即可。  
 
-## Linux离线安装
-访问不了外网的话，可以在 [这里](https://download.docker.com/linux/static/stable/x86_64/) 下载编译好的版本安装。  
+## CentOS离线安装
+安装依赖包:  
 ```sh
-tar -xf docker-*-ce.tgz
-sudo cp docker/* /usr/bin/
+yum install -y libcgroup container-selinux
 ```
 
-又或者在 [这里](https://download.docker.com/linux/centos/7/x86_64/stable/Packages/) 下载rpm安装 `docker-ce docker-ce-cli containerd.io`。  
+在 [这里](https://download.docker.com/linux/centos/7/x86_64/stable/Packages/) 下载`docker-ce`, `docker-ce-cli`, `containerd.io` 的rpm，然后通过rpm安装：  
+```sh
+yum remove -y runc
 
-修改 `/etc/docker/daemon.json` 文件：  
-```json
-{
-  "debug": true,
-  "bridge": "",
-  "iptables": false,
-  "hosts": ["tcp://127.0.0.1:2375", "unix:///var/run/docker.sock"],
-  "insecure-registries": [],
-  "exec-opts": ["native.cgroupdriver=cgroupfs"],
-  "labels": ["cluster=chong"],
-  "graph": "/data/docker"
-}
+rpm -ivh containerd.io-*.rpm docker-ce-*.rpm
 ```
-`insecure-registries` 可以加上公司内部的docker仓库。  
+启动docker服务：  
+```sh
+systemctl start docker
+systemctl enable docker
+systemctl status docker
+```
+
+# 非root用户使用
+默认情况下，非root用户需要sudo才能执行docker相关命令。  
+加入docker组之后，可以不带sudo执行。  
+```sh
+groupadd docker
+usermod -aG docker 你的用户名
+```
+需要重新登录或者重启电脑才生效。  
 
 # 代理
+如果机器设置了代理，那么docker也需要同步代理的设置。  
 ```sh
-mkdir /etc/systemd/system/docker.service
+mkdir /etc/systemd/system/docker.service.d
 touch /etc/systemd/system/docker.service.d/http-proxy.conf
 ```
 编辑 `http-proxy.conf` 文件，添加内容如下：  
@@ -48,7 +53,7 @@ touch /etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]    
 Environment="HTTP_PROXY=http://dev-proxy.oa.com:8080/" "HTTPS_PROXY=http://dev-proxy.oa.com:8080/" "NO_PROXY=127.0.0.1,localhost"
 ```
-`HTTP_PROXY` 和 `HTTPS_PROXY` 的值替换为公司的代理地址， `NO_PROXY` 可以添加不需要代理的地址。  
+`HTTP_PROXY` 和 `HTTPS_PROXY` 的值替换为公司的代理地址， `NO_PROXY` 添加不需要代理的地址。  
 确认配置后重启docker服务：  
 ```sh
 systemctl daemon-reload
@@ -57,8 +62,18 @@ systemctl show --property=Environment docker
 systemctl restart docker
 ```
 
+# 私有docker仓库
+如果需要拉取私有的docker仓库镜像，一般需要把仓库地址加入到 `insecure-registries` 。  
+在 `/etc/docker/daemon.json` 文件(没有则新建)中加入以下内容：  
+```json
+{
+  "insecure-registries" : ["mycompany.com:8080"]
+}
+```
+
 # 日常使用
 ```sh
+# 生成镜像
 docker build --network=host -t xxx-mod-dev:v1 .
 docker run -it --net=host --name xxxModDev -v /home/用户名:/home/用户名 xxx-mod-dev:v1 /bin/bash
 
@@ -74,3 +89,4 @@ docker start -i xxxModDev
 
 # 参考链接
 - [Cannot download Docker images behind a proxy](https://stackoverflow.com/questions/23111631/cannot-download-docker-images-behind-a-proxy) 
+- [docker预编译二进制文件](https://download.docker.com/linux/static/stable/x86_64/) 
