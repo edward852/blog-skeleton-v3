@@ -1,7 +1,7 @@
 ---
 title: "Oculus Quest上手指南"
 date: 2019-09-01T22:50:08+08:00
-lastmod: 2020-03-01T22:50:08+08:00
+lastmod: 2020-03-15T22:50:08+08:00
 draft: false
 tags: ["oculus", "quest"]
 categories: ["vr", "fun"]
@@ -18,6 +18,8 @@ OK，如果没问题，那么我们就可以从以下途径购买了：
 - 淘宝
 - 闲鱼收购
 - 其它
+
+大小的话看个人情况，喜欢玩游戏的可以买大容量版本，只是串流玩PC游戏的话64GB已经够用。  
 
 # 激活、配置设备
 
@@ -41,20 +43,21 @@ android需要科学上网下载，而ios需要国外apple id才能下载。
 
 安装之后，运行app就会引导配对和设置你的设备，按照提示做即可。  
 另外建议使用国外邮箱注册新帐号，否则可能收不到oculus发的验证码。  
-一般来说，如果不能科学上网，就会出现访问不了商店、更新卡在50%等问题。  
+一般来说，如果不能科学上网，就会出现访问不了商店、更新卡在50%、Wi-Fi连接不了等问题。  
 
 # 软件安装
 配置完成之后，就可以安装软件了。  
 不过oculus商店的游戏比较贵，建议先下免费的试玩版体验，比如说 `Beat Saber`。  
 收费游戏的话，土豪随意，普通玩家建议还是尽量在Steam购买，然后通过无线串流玩。  
 
-# 无线串流
+# 串流
+## 无线串流
 如果你有一台 `Steam VR Ready` 的电脑(主要是显卡要好)，那么可以通过无线串流的方法玩Steam的游戏。  
 同样的一款游戏，Oculus商店一般都比Steam商店要贵不少，而Steam的画质更佳。。。  
 无线串流的软件有收费的 [Virtual Desktop](https://www.vrdesktop.net) 和免费开源的 [ALVR](https://github.com/polygraphene/ALVR)。  
 建议还是 `Virtual Desktop` ， 效果确实是一分价钱一分货。  
 Virtual Desktop串流主要有以下步骤：  
-- PC安装 [Streamer App](https://download.vrdesktop.net/files/VirtualDesktop.Streamer.Setup.exe)
+- PC安装 [Streamer App](https://download.vrdesktop.net/files/VirtualDesktop.Streamer.Setup.exe) 以及PC版[Oculus软件](https://www.oculus.com/download_app/?id=1582076955407037)。  
 - PC在Oculus商店购买 **Oculus Quest** 版的Virtual Desktop (20美元)
 - Oculus Quest通过 [SideQuest](https://sidequestvr.com) 安装支持串流的Virtual Desktop版本
 
@@ -62,8 +65,16 @@ Virtual Desktop串流主要有以下步骤：
 为了降低延迟，建议PC有线接入路由器，Oculus Quest接入5G Wi-Fi。  
 另外Virtual Desktop每次启动的时候都会检查是否正版(Oculus商店已购买)，因此也需要科学上网。。。
 
-目前体验的情况，延迟不是很大，反正我觉得挺流畅的。  
+目前体验的情况，延迟不是很大，个人觉得挺流畅的。Beat Saber至少可以流畅玩困难级别。  
+
+## 有线串流
 如果对延迟比较敏感，那么可以购买Oculus Link进行有线串流。  
+也可以买第三方的(参考[兼容性](https://support.oculus.com/444256562873335/)说明)，比如官方推荐的 [Anker](https://www.amazon.cn/gp/product/B01MZIPYPY)，可以在中亚海外淘直接购买。  
+具体设置可以参考 [这里](https://support.oculus.com/525406631321134/#setup) 的说明。  
+
+# 视频
+可以直接通过内置浏览器在线看VR视频，也可以通过免费的`SKYBOX VR`视频播放器观看下载好的视频。  
+2K或者4K左右的视频观看效果会比较好，更低的看起来会有点模糊。  
 
 # FAQ
 - 为什么访问不了Oculus商店？  
