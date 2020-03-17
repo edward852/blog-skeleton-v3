@@ -1,21 +1,21 @@
 ---
 title: "Rust学习笔记"
 date: 2020-03-12T20:08:38+08:00
-lastmod: 2020-03-12T20:08:38+08:00
+lastmod: 2020-03-17T20:08:38+08:00
 draft: false
 tags: ["rust"]
 categories: ["language"]
 mathjax: false
 ---
 
-本文主要记录rust学习过程中的一些笔记。  
+本文主要记录Rust学习过程中的一些笔记。  
 <!--more-->
 
 # 安装
 参考 [官方安装页面](https://www.rust-lang.org/tools/install) 的说明操作即可。  
 
 # IDE
-使用 [VSCode](https://code.visualstudio.com/Download) 即可。  
+使用 [VSCode](https://code.visualstudio.com/Download) 以及`cargo`工具即可。  
 
 # 教程
 可以参考以下教程，本文主要记录一些没讲到的或者需要注意的点。  
@@ -149,10 +149,15 @@ fn main() {
 }
 ```
 
+# 宏
+类似lisp的宏，主要为了生成代码。常用的`vec!`,`panic!`等就是宏实现的。  
+
 # 异步IO
 可以使用 [tokio](https://github.com/tokio-rs/tokio) ，支持 `async, await`。  
 
 # 反射
 不支持。  
 
+# 参考链接
+- [现代化的内存管理：Cpp vs Rust](https://rust.cc/article?id=0c72fb25-2b3a-4896-9b3b-50ff8980728f) 
 
