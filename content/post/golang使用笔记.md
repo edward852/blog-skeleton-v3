@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2020-03-10T11:13:04+08:00
+lastmod: 2020-03-17T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -117,7 +117,7 @@ func main() {
 ```
 
 # 闭包
-支持闭包，即函数持有外层上下文(变量)的引用。  
+支持闭包，即持有外层上下文(变量)引用的函数。  
 ```go
 func sentenceFactory(str string) func(before, after string) string {
     // 返回的函数持有str变量
@@ -139,6 +139,17 @@ func sentenceFactory(str string) func(before, after string) string {
 defer后进先出，参数会先求值。  
 defer在函数退出时调用，而不是离开代码块时，因此for循环应避免使用defer。
 
+# slice
+slice可以当作动态数组来使用。  
+```go
+// 第2参数指定实际大小，第3参数指定(预计)容量大小
+a := make([]int, 5)
+b := make([]int, 0, 5)
+
+// 通过append新增
+a = append(a, 2, 3, 4)
+```
+注意`append`不直接修改slice，而是返回新的slice，所以一般都要赋值回去。  
 
 # struct
 当struct内匿名嵌入一个struct字段，能够继承其所有变量和方法。  
