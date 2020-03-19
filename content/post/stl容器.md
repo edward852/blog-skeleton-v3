@@ -38,6 +38,30 @@ size是元素个数，不用像C那样 `#define DIM(a) (sizeof(a)/sizeof(a[0]))`
 ## priority_queue
 优先队列。  
 默认通过vector+大小堆算法操作实现。  
+默认比较函数是`less<T>`，表示从低优先级到高优先级。  
+自定义比较函数时，需要注意第三个模板参数是类型名，可以参考下面的示例：  
+```cpp
+bool cmpFunc(int a, int b)
+{
+    return a<b;
+}
+
+class CmpObject {
+public:
+    bool operator()(int a, int b)
+    {
+        return a<b;
+    }
+};
+
+auto CustCmp = [](int a, int b) { return a<b; };
+// 函数指针
+priority_queue<int, vector<int>, decltype(&cmpFunc)> qf(cmpFunc);
+// lamda函数
+priority_queue<int, vector<int>, decltype(CustCmp)> ql(CustCmp);
+// 仿函数
+priority_queue<int, vector<int>, CmpObject> qo;
+```
 
 # stack
 后进先出数据存储。  
