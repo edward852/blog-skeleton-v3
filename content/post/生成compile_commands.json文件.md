@@ -1,7 +1,7 @@
 ---
 title: "生成compile_commands.json文件"
 date: 2018-04-29T12:01:24+08:00
-lastmod: 2018-04-29T12:01:24+08:00
+lastmod: 2020-03-19T12:01:24+08:00
 draft: false
 tags: ["compile", "json"]
 categories: ["trick"]
@@ -9,7 +9,7 @@ mathjax: false
 ---
 
 `compile_commands.json` 文件能够有效提高一些工具(比如说ccls[^1], vscode[^2])的代码跳转、补全等功能。  
-因此，本文将会说明如何生成 `compile_commands.json` 文件，特别是使用 `make` 的老工程。  
+因此，本文将会说明如何生成 `compile_commands.json` 文件，特别是使用 `makefile` 的老工程。  
 <!--more-->
 
 # cmake工程
@@ -18,8 +18,8 @@ cmake工程生成 `compile_commands.json` 文件比较简单，定义 `CMAKE_EXP
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 ```
 
-# make工程
-不过很多(旧的)工程都是用 `make` 来编译的，没有现成的选项生成 `compile_commands.json` 文件。  
+# makefile工程
+不过很多(旧的)工程都是用 `makefile` 来编译的，没有现成的选项生成 `compile_commands.json` 文件。  
 虽然也可以使用 `ctags`, `gtags` 等，但是跳转其实不是很准确。  
 我们可以通过 [Bear](https://github.com/rizsotto/Bear) 来生成，而且不需要改动代码。  
 具体Bear的安装这里就不赘述了，按照 [官方文档](https://github.com/rizsotto/Bear#how-to-install) 来即可。  

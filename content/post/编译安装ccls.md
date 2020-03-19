@@ -1,7 +1,7 @@
 ---
 title: "编译安装ccls"
 date: 2018-07-01T16:25:53+08:00
-lastmod: 2018-07-01T16:25:53+08:00
+lastmod: 2020-03-19T16:25:53+08:00
 draft: false
 tags: ["ccls", "lsp"]
 categories: ["tool"]
@@ -49,6 +49,10 @@ dotspacemacs-configuration-layers
  ;; other layers
 )
 ```
+
+# compile_commands.json
+虽然ccls支持 `.ccls` 和 `compile_commands.json`来配置项目，不过后者能够提供更准确的编译信息。  
+具体可以参考 [生成compile_commands.json文件](/post/生成compile_commands.json文件/) 的说明，基于makefile的旧项目也可以生成。  
 
 # 参考链接
 - https://github.com/MaskRay/ccls/wiki/Build
