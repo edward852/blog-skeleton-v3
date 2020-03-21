@@ -1,7 +1,7 @@
 ---
 title: "C++基础"
 date: 2018-03-06T16:19:28+08:00
-lastmod: 2020-03-05T16:19:28+08:00
+lastmod: 2020-03-21T16:19:28+08:00
 draft: false
 tags: ["cpp"]
 categories: ["language"]
@@ -722,14 +722,10 @@ extern "C" {
 
 # STL
 ## 容器
-### vector
-动态数组。  
-删除元素是erase+remove。  
-```cpp
-v.erase(remove(v.begin(), v.end(), val))
-```
+具体参考 [STL容器](/post/stl容器) 。  
 
 ## 算法
+具体参考 [STL算法](/post/stl算法/) 。  
 
 # 参考链接
 - [C++ Reference](http://www.cplusplus.com/reference/)
