@@ -1,7 +1,7 @@
 ---
 title: "STL容器"
 date: 2018-03-17T22:21:16+08:00
-lastmod: 2020-03-25T22:21:16+08:00
+lastmod: 2020-03-26T22:21:16+08:00
 draft: false
 tags: ["cpp", "stl", "container"]
 categories: ["language"]
@@ -18,6 +18,14 @@ mathjax: false
 静态数组，对C风格数组简单封装。  
 size是元素个数，不用像C那样 `#define DIM(a) (sizeof(a)/sizeof(a[0]))` 定义宏。  
 可以当成定长vector来使用，比C风格数组更好用。  
+如果元素是基本类型(非class)，那么默认是没有初始化的(除非是静态存储)。  
+因此需要使用初始化列表或者赋值进行初始化。  
+```cpp
+array<int,3> first;          // uninitialized:  {?,?,?}
+array<int,3> second = {};    // initialized as: {0,0,0}
+array<int,3> third = {1,2};  // initialized as: {1,2,0}
+array<int,3> fourth = third; // copied
+```
 
 # vector
 动态数组。内部存储空间是连续的，不够时会realloc(有复制的性能开销)。  
