@@ -157,3 +157,9 @@ unordered_set<pair<int, int>, PairHasher> visited;
 bitmap，按位(bit)存储数据，节省空间，特别适合标志位存储。  
 bitset最大位数是编译时确定的，如果需要动态大小可以使用 [vector&lt;bool&gt;](#vector_bool)。  
 另外bitset局部变量是分配在栈上，大小指定太大会导致栈溢出，需要通过new分配在堆上。  
+
+# 参考资料
+- 《STL源码剖析》 by 侯捷  
+- [EASTL](https://github.com/electronicarts/EASTL)  
+- [cpp reference](http://www.cplusplus.com/reference/stl/)  
+

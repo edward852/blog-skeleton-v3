@@ -144,3 +144,9 @@ uint64_t gcd(uint64_t a, uint64_t b)
     return 0==b? a: gcd(b, a%b);
 }
 ```
+
+# 参考资料
+- 《STL源码剖析》 by 侯捷  
+- [EASTL](https://github.com/electronicarts/EASTL)  
+- [cpp reference](http://www.cplusplus.com/reference/stl/)  
+
