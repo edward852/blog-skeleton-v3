@@ -1,7 +1,7 @@
 ---
 title: "DoubleBuffer"
 date: 2018-05-12T22:30:39+08:00
-lastmod: 2018-05-12T22:30:39+08:00
+lastmod: 2020-03-31T22:30:39+08:00
 draft: false
 tags: ["buffer"]
 categories: ["data-structure"]
@@ -39,3 +39,4 @@ public:
 	void commit() { index ^= 1; }
 };
 ```
+一般commit方法中使用异或即可(对应xorb汇编指令)，也可以使用C++11的atomic操作。  
