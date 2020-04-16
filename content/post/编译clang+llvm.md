@@ -15,6 +15,12 @@ mathjax: false
 可以先到 https://github.com/llvm/llvm-project/releases 查看是否有适合你系统的。  
 `clang+llvm` 开头的压缩包就是预编译的二进制文件，如果有合适的直接下载安装即可，下文可以忽略。  
 
+如果不要求最新版本，那么也可以使用第三方软件仓库安装：  
+```sh
+# CentOS7
+yum install -y llvm7.0
+```
+
 # 下载源码
 虽然可以通过Git下载到最新代码，但是不一定能编译通过，又或者可能有bug。  
 建议还是到 [releases](https://github.com/llvm/llvm-project/releases) 这里下载 `Source code(tar.gz)` 文件。  

@@ -3,7 +3,7 @@ title: "编译安装GCC 7.2.0"
 date: 2018-04-22T22:41:39+08:00
 lastmod: 2018-04-22T22:41:39+08:00
 draft: false
-tags: ["gcc"]
+tags: ["gcc", "scl"]
 categories: ["tool"]
 mathjax: false
 ---
@@ -11,6 +11,20 @@ mathjax: false
 服务器默认安装的GCC版本一般都比较低，而一些开源库已经开始依赖高版本GCC才有的特性。  
 因此我们需要编译安装新版本的GCC，本文以7.2.0为例进行说明。  
 <!--more-->
+
+# 预编译版本
+先搜索一下第三方软件仓库是否有高版本的GCC，有的话直接安装即可。  
+以CentOS7为例，可以通过SCL下载安装：  
+```sh
+yum install -y centos-release-scl
+yum install -y devtoolset-7-gcc-c++
+
+# 临时使用新版本
+scl enable devtoolset-7 bash
+
+# 固定使用新版本，添加下述命令到 .bashrc 或 .bash_profile
+source scl_source enable devtoolset-7
+```
 
 # 下载源码
 
