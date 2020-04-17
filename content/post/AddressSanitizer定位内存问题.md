@@ -1,7 +1,7 @@
 ---
 title: "AddressSanitizer定位内存问题"
 date: 2020-04-16T23:51:59+08:00
-lastmod: 2020-04-16T23:51:59+08:00
+lastmod: 2020-04-17T23:51:59+08:00
 draft: false
 tags: ["memory", "address", "sanitizer"]
 categories: ["tool"]
@@ -23,11 +23,11 @@ mathjax: false
 安装4.8以上GCC或3.1以上LLVM即可。  
 
 ## GCC
-尽量使用新版本，不然个别内存问题可能不支持定位。  
-安装可以参考 [GCC7安装](/post/编译安装gcc7.2.0/)的说明。下文以GCC7.3为例进行说明。  
+尽量使用新版本(最好4.9以上)，不然个别内存问题可能不支持定位。  
+安装可以参考 [GCC7安装](/post/编译安装gcc7.2.0/) 的说明。下文以GCC7.3为例进行说明。  
 
 ## libasan
-安装对应版本libasan：  
+GCC需要配合libasan使用，注意安装对应版本：  
 ```sh
 # CentOS系统
 # GCC 4.8安装libasan, 7安装libasan4, 9安装libasan5
@@ -45,6 +45,10 @@ ln -fs /usr/bin/llvm-symbolizer-7.0 /usr/bin/llvm-symbolizer
 # 方法2 设置环境变量
 export ASAN_SYMBOLIZER_PATH=`which /usr/bin/llvm-symbolizer-7.0`
 ```
+如果不能正常显示符号，那么可以尝试设置ASAN_OPTIONS:  
+```sh
+export ASAN_OPTIONS=symbolize=1
+```
 如果不方便安装LLVM的话，也可以通过`addr2line`手动定位符号和行号：  
 ```sh
 addr2line -e 二进制文件 -sfC 地址
@@ -58,11 +62,16 @@ addr2line -e 二进制文件 -sfC 地址
 - 动态 `-lasan`
 - 静态 `-static-libasan`
 
+另外如果需要显示符号，最好加上`-g`并且不要使用`strip`。  
+
 ## 运行
 一般直接运行即可定位各种内存问题，有问题可以设置ASAN_OPTIONS，具体参考 [Asan Flags](https://github.com/google/sanitizers/wiki/AddressSanitizerFlags) 。  
 ```sh
 export ASAN_OPTIONS=symbolize=1:detect_leaks=1
 ```
+
+# 测试代码
+[参考测试代码](https://github.com/edward852/memory/blob/master/main.cpp)  
 
 # FAQ
 - 为什么只显示地址，看不到符号和行号?  
