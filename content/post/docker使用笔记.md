@@ -87,6 +87,12 @@ exit
 docker start -i xxxModDev
 ```
 
+# 权限管理
+方法一是给用户添加sudo权限，方法二是在已启动容器以root身份执行命令。  
+```sh
+docker exec -it -u root 容器Id或名称 bash
+```
+
 # 参考链接
 - [Cannot download Docker images behind a proxy](https://stackoverflow.com/questions/23111631/cannot-download-docker-images-behind-a-proxy) 
 - [docker预编译二进制文件](https://download.docker.com/linux/static/stable/x86_64/) 
