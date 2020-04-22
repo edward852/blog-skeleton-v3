@@ -71,7 +71,7 @@ export ASAN_OPTIONS=symbolize=1:detect_leaks=1
 ```
 
 # 测试代码
-[参考测试代码](https://github.com/edward852/memory/blob/master/main.cpp)  
+[参考测试代码](https://github.com/edward852/os/tree/master/memory)  
 
 # FAQ
 - 为什么只显示地址，看不到符号和行号?  
