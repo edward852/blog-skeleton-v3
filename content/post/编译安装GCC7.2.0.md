@@ -70,6 +70,15 @@ export PATH=/usr/local/gcc-7.2.0/bin:$PATH
 设置PATH环境变量，优先选择高版本的GCC，需要的话可以加到 `~/.bashrc` 或者 `~/.bash_profile` 里面。  
 这样处理可以达到不同版本GCC共存、减少影响的目的，特别是多个开发人员共用服务器的情况尤为重要。  
 
+# libstdc++.so
+编译目录下的 `libstdc++.so.6.0.24` 可以复制到 `/usr/lib64/` 并新建软链 `libstdc++.so.6` 指向新的so。  
+这样可以解决如下一类 `GLIBCXX` 找不到的问题。   
+```
+version `GLIBCXX_3.4.20' not found
+version `GLIBCXX_3.4.21' not found
+```
+
+
 # 参考链接
 - http://caosiyang.github.io/2016/05/04/installing-gcc
 
