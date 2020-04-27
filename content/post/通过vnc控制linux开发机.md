@@ -73,6 +73,7 @@ yum install -y tigervnc-server
 
 # 安装vnc viewer
 在 [这里](https://www.realvnc.com/en/connect/download/viewer) 下载 `vnc viewer`， 最好选绿色版，否则有些公司的安全(监控)软件会告警。  
+也可以安装 [TigerVNC](https://dl.bintray.com/tigervnc/stable/) ，resize效果好些，但是不能记住密码。  
 
 # 安装noVNC(可选)
 安装 [noVNC](https://github.com/novnc/noVNC)，可以通过浏览器控制你的开发机。  
@@ -106,6 +107,7 @@ yum install -y tigervnc-server
   rm /tmp/.X11-unix/X1
   ```
 - 不能复制、粘贴  
+  `~/.vnc/xstartup` 加上 vncconfig  
   ```sh
   vncconfig -nowin &
   ```

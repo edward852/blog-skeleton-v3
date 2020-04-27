@@ -73,6 +73,12 @@ systemctl restart docker
 
 # 日常使用
 ```sh
+# 拉取镜像
+docker pull centos:7
+
+# 临时使用
+docker run -it --privileged --rm centos:7 bash
+
 # 生成镜像
 docker build --network=host -t xxx-mod-dev:v1 .
 docker run -it --net=host --name xxxModDev -v /home/用户名:/home/用户名 xxx-mod-dev:v1 /bin/bash
@@ -85,12 +91,30 @@ exit
 
 # 再次进入容器
 docker start -i xxxModDev
+
+# 上传镜像(先登录)
+TAG_VER=`date +%y%m%d%H`
+docker tag local-image:tagname new-repo:tagname
+docker push new-repo:tagname
+
+# 清理悬空镜像
+# docker image prune
+docker rmi -f $(docker images -q -f dangling=true)
+
+# 清理停掉24小时以上的容器(要保留的容器可以start,stop下)
+docker container prune --filter "until=24h"
+
+# 清理已停止容器、悬空镜像(比较暴力，建议使用上面两条命令)
+# docker system prune
+
+# 普通用户没有sudo权限，以root用户执行命令(安装软件)
+docker exec -it -u root --privileged 容器Id或名称 bash
 ```
 
 # 权限管理
 方法一是给用户添加sudo权限，方法二是在已启动容器以root身份执行命令。  
 ```sh
-docker exec -it -u root 容器Id或名称 bash
+docker exec -it -u root --privileged 容器Id或名称 bash
 ```
 
 # 参考链接
