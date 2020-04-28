@@ -50,9 +50,13 @@ kernel.perf_event_paranoid=-1
 # 使用
 ## 命令行
 通过 `perf record` 可以搜集指定监控指标的数据，然后通过 `perf report` 查看结果。  
-其中 `-e` 指定监控指标，通过 `perf list` 查看完整列表。  
-`-g` 或者 `--call-graph` 记录调用关系。  
+其中 `-e` 选项指定监控指标，通过 `perf list` 查看完整列表。  
+`-g` 或者 `--call-graph` 选项启用记录调用关系。  
+另外可以通过 `-p` 选项指定监控的进程号，也可以直接运行程序。  
 ```sh
+# 实时分析
+perf top -p 进程号
+
 # 默认通过fp(frame pointer)获取调用关系，最好带-fno-omit-frame-pointer选项重编程序
 perf record -a -e cpu-clock -g ./profiling ../moby.txt
 
