@@ -1,10 +1,10 @@
 ---
 title: "STL容器"
 date: 2018-03-17T22:21:16+08:00
-lastmod: 2020-03-26T22:21:16+08:00
+lastmod: 2020-04-30T22:21:16+08:00
 draft: false
 tags: ["cpp", "stl", "container"]
-categories: ["language"]
+categories: ["data-structure", "language"]
 mathjax: false
 ---
 
@@ -146,8 +146,13 @@ unordered_set<pair<int, int>, PairHasher> visited;
 
 # list
 双向链表。  
-任意位置插入、删除操作比较快，特别是已经有迭代器的情况。  
+在有节点迭代器时插入、删除操作比较快。  
 缺点是不能根据位置直接访问，需要遍历才行。  
+与哈希表配合使用，可以实现一些操作在O(1)的数据结构(比如说LRU，LFU)。  
+最后元素的迭代器可以通过end()自减获得。  
+通过 `splice` 可以实现链表(不同或同一链表皆可)节点的转移。  
+STL内部实现一般是循环链表，通过一个代表end的内部节点管理。  
+链表迭代器可以简单理解为拥有指向节点指针的对象。  
 
 # forward_list
 单向链表。  

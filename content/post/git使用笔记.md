@@ -1,7 +1,7 @@
 ---
 title: "Git使用笔记"
 date: 2019-11-09T15:15:51+08:00
-lastmod: 2019-11-09T15:15:51+08:00
+lastmod: 2020-04-29T14:55:51+08:00
 draft: false
 tags: ["git"]
 categories: ["note"]
@@ -250,7 +250,11 @@ git submodule add 外部git仓库 当前仓库内相对路径
 ## 更新 / 补拉
 更新子模块或者拉取遗漏的子模块(git clone时没带 `--recursive` 参数)：  
 ```sh
+# 补拉
 git submodule update --init --recursive
+
+# 更新
+git submodule update --remote
 ```
 
 # rebase
@@ -356,3 +360,14 @@ git apply xxx.diff
 # svn迁移git
 具体参考 [svn迁移git](/post/svn迁移git/) 的说明。  
 
+# 小号操作
+git clone后马上修改仓库下 `.git/config` 文件的如下字段：  
+```sh
+[remote "origin"]
+    url = https://小号名@github.com/xxx.git
+
+[user]
+    name=小号名
+    email=小号邮箱
+```
+第一次push会提示输入密码，后续就不用了。  
