@@ -1,7 +1,7 @@
 ---
 title: "Hugo对Markdown支持情况测试"
 date: 2020-02-21T15:00:28+08:00
-lastmod: 2020-02-21T21:17:23+08:00
+lastmod: 2021-01-31T21:17:23+08:00
 draft: false
 tags: ["markdown", "GFM", "LaTex", "emoji", "PicGo"]
 categories: ["language"]
@@ -64,16 +64,16 @@ mathjaxEnableSingleDollar: true
 
 # 图片
 一般格式是 `![文字描述](链接)` ：  
-![org-mode-logo](http://orgmode.org/img/org-mode-unicorn-logo.png)
+![org-mode-logo](https://i.loli.net/2021/01/31/4ZHoWduI59fiqJY.png)
 
 这种格式显示图片不能控制对齐和大小，需要的话可以采取raw html的方法：  
 ```html
 <p align="center">
-    <img src="http://orgmode.org/img/org-mode-unicorn-logo.png" width="100" />
+    <img src="https://i.loli.net/2021/01/31/4ZHoWduI59fiqJY.png" width="100" />
 </p>
 ```
 <p align="center">
-    <img src="http://orgmode.org/img/org-mode-unicorn-logo.png" width="100" />
+    <img src="https://i.loli.net/2021/01/31/4ZHoWduI59fiqJY.png" width="100" />
 </p>
 
 {{% admonition tip "tip" %}}
@@ -150,11 +150,11 @@ long key | long测试中文
 | long key | long测试中文 |
 ```
 
-key | value
---- | ---
-long key | long测试中文
+| key      | value        |
+| -        | -            |
+| long key | long测试中文 |
 
-另外在 [spacemacs](https://www.spacemacs.org/) 中使用 `Tab` 和 `Shift Tab` 可以自动对齐表格和在单元格内跳转，谁用谁知道 :smile:  
+另外在 [spacemacs](https://www.spacemacs.org/) 中使用 `Tab` 和 `Shift Tab` 可以自动对齐表格和在单元格内跳转，谁用谁知道！ :smile:  
 ![](https://i.loli.net/2020/02/21/beFw7Af9GLijI4T.gif)
 
 # 分隔线
@@ -179,7 +179,7 @@ $$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$$
 
 # 脚注Footnote
 
-脚注主要有数字脚注[^1]和命名脚注[^org]。  
+脚注主要有数字脚注[^1]和命名脚注[^emoj]。  
 在文章末尾行首以下面的方式可以定义脚注：  
 `[^数字]: 数字脚注内容`  
 `[^名字]: 命名脚注内容`  
@@ -197,8 +197,8 @@ $$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$$
 - [x] 已测试
 
 # 杂项
-Even主题本身还支持一些 [Shortcodes](https://blog.olowolo.com/example-site/post/shortcodes/) 以及流程图、时序图。  
+[Even主题](https://github.com/olOwOlo/hugo-theme-even) 本身还支持一些 [Shortcodes](https://hugo-theme-even.netlify.app/post/shortcodes/) 以及流程图、时序图。  
 由于不是Markdown标准，所以这里就不测试了。  
 
-[^1]: <http://orgmode.org/org.html#Footnotes>
-[^org]: <http://orgmode.org/org.html>
+[^1]: <https://guides.github.com/features/mastering-markdown>
+[^emoj]: <https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md>
