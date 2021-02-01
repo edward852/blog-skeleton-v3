@@ -31,7 +31,7 @@ jobs:
     
     # build the website
     - run: npm install
-    - run: (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
+    - run: (cd themes/even; git apply ../../theme.patch; yarn install; pwd; ls -l package*; yarn build)
     - run: ./hugo
     - run: npm run algolia
       env: 
