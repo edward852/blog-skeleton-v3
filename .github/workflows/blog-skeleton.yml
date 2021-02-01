@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.16.x]
+        node-version: [11.x]
 
     steps:
     - run: sudo apt-get install -y python-pygments
@@ -33,7 +33,7 @@ jobs:
     
     # build the website
     - run: npm install
-    - run: (cd themes/even; git apply ../../theme.patch; yarn install; npm install node-sass@^4.12.0; yarn build)
+    - run: (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
     - run: ./hugo
     - run: npm run algolia
       env: 
