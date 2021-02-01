@@ -151,7 +151,7 @@ long key | long测试中文
 ```
 
 | key      | value        |
-| -        | -            |
+|----------|--------------|
 | long key | long测试中文 |
 
 另外在 [spacemacs](https://www.spacemacs.org/) 中使用 `Tab` 和 `Shift Tab` 可以自动对齐表格和在单元格内跳转，谁用谁知道！ :smile:  
