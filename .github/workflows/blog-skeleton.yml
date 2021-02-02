@@ -4,40 +4,30 @@
 name: blog CI
 
 on:
-  #push:
-  #  branches: [ master ]
+  push:
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [11.x]
-
     steps:
-    - run: sudo apt-get install -y python-pygments
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
         persist-credentials: false
     
-    # pull submodule
-    #- run: git submodule update --init --recursive
-    # Clean and don't fail
-    - run: rm -rf public || exit 0
-    
     # node setup
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '14.x'
     
     # build the website
-    - run: npm install
-    - run: (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
+    - run: rm -rf public || exit 0
+    - run: (cd themes/even; git apply ../../theme.patch)
     - run: ./hugo
+    - run: npm install
     - run: npm run algolia
       env: 
         ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
@@ -48,8 +38,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         REPOSITORY_NAME: edward852/edward852.github.com
-        BRANCH: master # The branch the action should deploy to.
-        FOLDER: public # The folder the action should deploy.
+        BRANCH: master
+        FOLDER: public
         SINGLE_COMMIT: true
         CLEAN: false
-      
+

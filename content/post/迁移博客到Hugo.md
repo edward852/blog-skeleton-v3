@@ -1,9 +1,9 @@
 ---
 title: "迁移博客到Hugo"
 date: 2020-02-21T11:58:18+08:00
-lastmod: 2020-02-23T19:10:18+08:00
+lastmod: 2021-02-02T19:10:18+08:00
 draft: false
-tags: ["blog", "Hugo", "Travis CI", "Markdown", "Netlify", "Algolia"]
+tags: ["blog", "Hugo", "Travis CI", "Markdown", "Netlify", "Algolia", "GitHub Actions"]
 categories: ["essay", "CI"]
 mathjax: false
 ---
@@ -30,12 +30,13 @@ mathjax: false
 - 安装Hugo以及Even主题
 - 配置 `config.toml`
 - 通过 [Pandoc](https://pandoc.org/) 转换原博文为md格式，调整Front Matter
-- 通过 [Travis CI](https://travis-ci.org/) 部署
+- 通过 [GitHub Actions](https://docs.github.com/en/actions) 部署
 
 # 部署
 如果不涉及主题的修改，其实通过 [Netlify](https://app.netlify.com/) 部署更简单，基本上一路点击即可。  
-不过如果你想调整主题或者做些定制操作，那么还是用Travis CI部署更好。  
-具体参考本站的 `.travis.yml` 文件即可。
+~~不过如果你想调整主题或者做些定制操作，那么还是用Travis CI部署更好。~~  
+~~具体参考本站的 `.travis.yml` 文件即可。~~  
+通过 [GitHub Actions](https://docs.github.com/en/actions) 部署，具体参考本站的 `blog-skeleton.yml` 文件。  
 
 # 添加搜索支持
 添加搜索支持麻烦一些，因为Even主题不支持 :sweat_smile: 。  
