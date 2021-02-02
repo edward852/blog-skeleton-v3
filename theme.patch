@@ -1,3 +1,16 @@
+diff --git a/assets/sass/_variables.scss b/assets/sass/_variables.scss
+index ae97a8f..1b32eab 100644
+--- a/assets/sass/_variables.scss
++++ b/assets/sass/_variables.scss
+@@ -5,7 +5,7 @@
+ // ========== Theme Color ========== //
+ // Config here to change theme color
+ // Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
+-$theme-color-config: 'Default';
++$theme-color-config: 'Cobalt Blue';
+ 
+ // Default theme color map
+ $theme-color-map: (
 diff --git a/layouts/404.html b/layouts/404.html
 index 171fe09..93ed7d3 100644
 --- a/layouts/404.html
@@ -11,24 +24,22 @@ index 171fe09..93ed7d3 100644
  </div>
  <script>
 diff --git a/layouts/partials/head.html b/layouts/partials/head.html
-index d602390..89fc6d1 100644
+index 483339d..037d4cf 100644
 --- a/layouts/partials/head.html
 +++ b/layouts/partials/head.html
-@@ -88,3 +88,8 @@
+@@ -89,3 +89,7 @@
    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
  <![endif]-->` | safeHTML }}
 +
-+<meta name="google-site-verification" content="XhUaVuJqE2hOm0c6SPvXq3P1Lh8hLLGdQYr7wES3bcQ" />
 +{{- if .Site.Params.algolia.appId -}}
 +<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 +{{- end -}}
-\ No newline at end of file
 diff --git a/layouts/partials/header.html b/layouts/partials/header.html
-index 3592e88..bf53d33 100644
+index 24d5b37..6590a0d 100644
 --- a/layouts/partials/header.html
 +++ b/layouts/partials/header.html
-@@ -10,6 +10,12 @@
+@@ -12,6 +12,11 @@
  
  <nav class="site-navbar">
    <ul id="menu" class="menu">
@@ -37,54 +48,27 @@ index 3592e88..bf53d33 100644
 +      <input type="search" class="docsearch-input" placeholder="Search" />
 +    </li>
 +    {{- end -}}
-+
      {{ range .Site.Menus.main -}}
        <li class="menu-item">
          <a class="menu-item-link" href="{{ .URL | safeURL }}">{{ .Name }}</a>
 diff --git a/layouts/partials/scripts.html b/layouts/partials/scripts.html
-index de35229..9eb58e7 100644
+index 71fe659..6893dd7 100644
 --- a/layouts/partials/scripts.html
 +++ b/layouts/partials/scripts.html
-@@ -130,3 +130,16 @@
+@@ -133,3 +133,16 @@
  {{ range .Site.Params.customJS -}}
    <script src="{{ "/js/" | relURL }}{{ . }}"></script>
  {{ end }}
 +
 +{{- if .Site.Params.algolia.appId -}}
-+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-+<script>
-+  docsearch({
-+  apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
-+  indexName: {{ .Site.Params.algolia.indexName }},
-+  appId: {{ .Site.Params.algolia.appId }},
-+  inputSelector: '.docsearch-input',
-+  debug: false,
-+  });
-+</script>
-+{{ end }}
-\ No newline at end of file
-diff --git a/src/css/_partial/_post/_content.scss b/src/css/_partial/_post/_content.scss
-index 688a924..b21d3df 100644
---- a/src/css/_partial/_post/_content.scss
-+++ b/src/css/_partial/_post/_content.scss
-@@ -23,6 +23,7 @@
-         .icon-link {
-           visibility: hidden;
-           font-size: 16px;
-+          display: contents;
- 
-           &:before {
-             vertical-align: middle;
-diff --git a/src/css/_variables.scss b/src/css/_variables.scss
-index 8e1553b..f3e0e24 100644
---- a/src/css/_variables.scss
-+++ b/src/css/_variables.scss
-@@ -5,7 +5,7 @@
- // ========== Theme Color ========== //
- // Config here to change theme color
- // Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
--$theme-color-config: 'Default';
-+$theme-color-config: 'Cobalt Blue';
- 
- // Default theme color map
- $theme-color-map: (
++  <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
++  <script>
++   docsearch({
++       apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
++       indexName: {{ .Site.Params.algolia.indexName }},
++       appId: {{ .Site.Params.algolia.appId }},
++       inputSelector: '.docsearch-input',
++       debug: false,
++   });
++  </script>
++{{- end -}}
