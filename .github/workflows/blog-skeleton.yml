@@ -1,0 +1,55 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: blog CI
+
+on:
+  #push:
+  #  branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [11.x]
+
+    steps:
+    - run: sudo apt-get install -y python-pygments
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+        persist-credentials: false
+    
+    # pull submodule
+    #- run: git submodule update --init --recursive
+    # Clean and don't fail
+    - run: rm -rf public || exit 0
+    
+    # node setup
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    # build the website
+    - run: npm install
+    - run: (cd themes/even; git apply ../../theme.patch; yarn install; yarn build)
+    - run: ./hugo
+    - run: npm run algolia
+      env: 
+        ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+    
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        REPOSITORY_NAME: edward852/edward852.github.com
+        BRANCH: master # The branch the action should deploy to.
+        FOLDER: public # The folder the action should deploy.
+        SINGLE_COMMIT: true
+        CLEAN: false
+      
