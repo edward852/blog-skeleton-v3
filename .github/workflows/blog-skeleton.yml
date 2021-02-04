@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: git config core.quotepath false
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
@@ -25,6 +24,7 @@ jobs:
         node-version: '14.x'
     
     # build the website
+    - run: git config core.quotepath false
     - run: rm -rf public || exit 0
     - run: (cd themes/even; git apply ../../theme.patch)
     - run: ./hugo
