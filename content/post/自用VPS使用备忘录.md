@@ -3,7 +3,7 @@ title: "自用VPS使用备忘录"
 date: 2020-08-03T20:07:54+08:00
 lastmod: 2021-02-03T20:07:54+08:00
 draft: false
-tags: ["vps", "v2ray", "aria2", "rclone", "OneDrive"]
+tags: ["vps", "v2ray", "aria2", "rclone", "OneDrive", "youtube-dl"]
 categories: ["backend"]
 mathjax: false
 ---
@@ -91,3 +91,28 @@ on-download-complete=/root/.aria2c/upload.sh
 ```shell
 systemctl restart aria2
 ```
+# youtube-dl
+[youtube-dl](https://github.com/ytdl-org/youtube-dl)可以下载许多[视频网站](https://ytdl-org.github.io/youtube-dl/supportedsites.html)的资源，包括油管、优酷、P站等。  
+先安装 `python` 和 `ffmpeg` 两个前置依赖项。  
+然后按照 [官方说明](https://github.com/ytdl-org/youtube-dl#installation) 操作即可：  
+```shell
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+```
+下载选项很多，这里以油管为例简单示范一下：
+```shell
+# 查看视频所有格式
+youtube-dl -F video_url
+
+# 下载视频
+youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' -o '01.%(ext)s' video_url 
+
+# 下载视频列表
+youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' -o 'playlist/%(playlist_index)s.%(ext)s' playlist_url
+
+# 下载视频列表中指定视频
+--playlist-items 1,27-30
+```
+使用的时候注意VPS的硬盘大小和每月流量，适度下载视频资源。  
+另外说一句，油管上面有不少国产电视剧的高清资源可以免费下载，遇见合适的赶紧下载同步到网盘吧。  
+
