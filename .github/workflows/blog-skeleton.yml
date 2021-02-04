@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: git config core.quotepath false
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
