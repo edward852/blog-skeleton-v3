@@ -1,7 +1,7 @@
 ---
 title: "Oculus Quest上手指南"
 date: 2019-09-01T22:50:08+08:00
-lastmod: 2021-02-01T22:50:08+08:00
+lastmod: 2021-02-11T22:50:08+08:00
 draft: false
 tags: ["oculus", "quest"]
 categories: ["vr", "fun"]
@@ -91,7 +91,7 @@ Virtual Desktop串流主要有以下步骤：
 具体设置可以参考 [这里](https://support.oculus.com/525406631321134/#setup) 的说明。  
 
 # 视频
-可以直接通过内置浏览器在线看VR视频，也可以通过免费的`SKYBOX VR`视频播放器观看下载好的视频。  
+可以直接通过内置浏览器在线看VR视频，也可以通过~~免费的~~`SKYBOX VR`视频播放器观看下载好的视频。  
 特别赞的是，SKYBOX VR可以播放处于同一局域网内电脑上的视频，彻底释放Quest的存储空间！  
 另外2K或者4K左右的视频观看效果会比较好(小姐姐更好看:blush:)，更低的看起来会有点模糊。  
 
