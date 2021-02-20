@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2020-03-17T11:13:04+08:00
+lastmod: 2021-02-13T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -68,7 +68,7 @@ import "fmt"
 // 引入多个包
 import (
     "net/http"
-    . "time"    // 引入time包，使用包中的函数、变量可以不加包名前缀
+    . "time"    // 引入time包，使用包中公开的函数、变量可以不加包名前缀
     m "math"    // 以别名m引入math包
     
     "database/sql"
@@ -86,6 +86,7 @@ package main的main函数为程序入口。
 
 # 变量声明
 函数内才可以使用 `:=` 自动推导声明，否则需要完整的声明。  
+不同类型需要显式转换。  
 
 # array
 array是静态数组。  
@@ -130,17 +131,20 @@ func sentenceFactory(str string) func(before, after string) string {
 # 流程控制
 ## if
 可以有for类似的初始化表达式，定义的变量在if else代码块中有效。  
-多行条件，运算符要放在最后。  
+多行条件，运算符要放在最后(如`&&`)。  
 
 ## switch
 分支默认break，如果不需要break，要么case写在一起，要么使用 `fallthrough` 关键字。  
+分支是表达式，不局限于数字。  
 
 ## defer
 defer后进先出，参数会先求值。  
-defer在函数退出时调用，而不是离开代码块时，因此for循环应避免使用defer。
+defer在函数退出时调用，而不是离开代码块时，因此for循环应避免使用defer。  
+defer适合就地安排收尾工作，比如说释放资源(申请和释放配对、不容易遗漏处理)。  
 
 # slice
-slice可以当作动态数组来使用。  
+slice类似数组的引用，不存实际数据。  
+slice可以当作动态数组来使用，通过`make`创建。  
 ```go
 // 第2参数指定实际大小，第3参数指定(预计)容量大小
 a := make([]int, 5)
@@ -150,6 +154,10 @@ b := make([]int, 0, 5)
 a = append(a, 2, 3, 4)
 ```
 注意`append`不直接修改slice，而是返回新的slice，所以一般都要赋值回去。  
+另外使用`range`遍历更好，不容易出现越界问题。  
+
+# map
+存储键值型数据，通过字面量或者`make`创建、初始化后才能使用。  
 
 # struct
 当struct内匿名嵌入一个struct字段，能够继承其所有变量和方法。  
@@ -171,6 +179,7 @@ type ReadWriter interface {
 
 # 指针
 指针调用方法或访问变量使用 `.` 运算符(而不是`->`)。  
+没有指针算术运算操作，减少野指针。  
 
 # 并发
 参考文档  [Share Memory By Communicating](https://blog.golang.org/share-memory-by-communicating) 以及 [代码示例](https://golang.org/doc/codewalk/sharemem/) 。还可以参考 [stackoverflow](https://stackoverflow.com/questions/36391421/explain-dont-communicate-by-sharing-memory-share-memory-by-communicating) 上面的解释。  
