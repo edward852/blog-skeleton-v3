@@ -115,12 +115,12 @@ systemctl enable redis-server
   struct __attribute__ ((__packed__)) sdshdr32 {...}
   struct __attribute__ ((__packed__)) sdshdr64 {...}
   ```
-  ![redis sds](http://zhangtielei.com/assets/photos_redis/redis_sds_structure.png) 
+  ![redis sds](/images/redis_sds.png) 
 - dict  
   开链法哈希表实现，自动扩容时会增量重新哈希。  
   重新哈希操作分散在查询、插入、删除中逐步完成。  
   哈希表的大小总是2的幂，重新哈希时有2个哈希表，其中一个的大小是另一个的2倍。  
-  ![redis dict](http://zhangtielei.com/assets/photos_redis/redis_dict_structure.png)
+  ![redis dict](/images/redis_dict.png)
 - skiplist  
   可以参考 [跳跃表skiplist](/post/常用数据结构/#跳跃表skiplist) 的说明。  
 - ziplist  
