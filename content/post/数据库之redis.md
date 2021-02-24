@@ -4,7 +4,7 @@ date: 2020-05-23T13:22:50+08:00
 lastmod: 2021-02-23T13:22:50+08:00
 draft: false
 tags: ["redis","backup", "distributed", "lock"]
-categories: ["db"]
+categories: ["database"]
 mathjax: false
 ---
 
@@ -165,27 +165,61 @@ systemctl enable redis-server
 # 多线程
 命令执行仍然是单线程模型，多线程用于处理IO。  
 
+# 主从+哨兵
+## 主从
+一般是主机可读可写，多个从机只读。  
+从机通过`slaveof`设置其对应的主机：  
+```
+slaveof 主机IP 端口
+```
+
+## 哨兵
+参考官方说明 [High Availability](https://redis.io/topics/sentinel)。  
+哨兵至少3个，采用Raft算法选leader，监控主机并在其发生故障时自动切换主从。  
+
 # 应用
 ## 缓存
 
 ## 排行榜
+sorted set的`ZADD`、`ZRANGE` 、`ZRANK`。  
 
 ## 计数器
-`incrby`
+原子操作命令 `INCRBY` 。  
 
-## 分页 范围查询
+## 限时场景
+通过`EXPIRE`设置键的超时时间，适合限时优惠券、验证码等场景。  
+
+## 分页与模糊搜索
+`ZRANGE key min max BYLEX [LIMIT offset count]` 。  
+比如说`ZRANGE movies - + BYLEX LIMIT 0 10`，`BYLEX`可以按内容的词典序排序。  
 
 ## 相互关系存储
 比如说点赞、好友关系(共同好友)。  
+set的`SADD`、`SISMEMBER`、`SINTER`。  
+
+## 最新列表
+list的`LPUSH`、`LTRIM`、`LRANGE`。  
 
 ## 大数据位操作
-`setbit、getbit、bitcount`
+参考官方说明 [Bitmaps](https://redis.io/topics/data-types-intro#bitmaps)。  
+bitmap的`SETBIT、GETBIT、BITCOUNT`。  
+适合签到、判断是否在线等场景。  
 
 ## 简单消息队列
+参考官方说明 [Pus/Sub](https://redis.io/topics/pubsub) 。  
 
-## 秒杀活动
+## 秒杀类活动
+单例的情况，使用SET命令与NX、PX选项实现。  
+业务逻辑复杂一点的，还可以使用 [lua脚本](https://redis.io/commands/eval) 实现原子操作。  
+
+集群的情况，不是很推荐使用分布式锁(高并发性能不高)。  
+削峰、限流和分库分表更为重要，最终转化为单例的情况。  
+削峰可以通过消息队列缓冲，在时间上分散请求。  
+限流可以过滤短时间内重复请求，只允许预约过的用户，限制并发请求量。  
+分库分表可以分地区分商品分库存等。  
 
 ## 分布式锁
+个人认为分布式锁适合低频使用的场景，比如说选主、服务发现之类的。  
 具体参考官方说明 [Distributed locks](https://redis.io/topics/distlock) 。  
 
 ### 单例获取、释放锁
