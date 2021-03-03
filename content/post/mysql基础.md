@@ -51,10 +51,12 @@ CREATE DATABASE 用于创建数据库。
 CREATE DATABASE database_name;
 ```
 
-比如说建立名为my\_db的数据库：
+比如说建立名为my_db的数据库并切换：
 
 ``` sql
 CREATE DATABASE my_db;
+
+USE my_db;
 ```
 
 ## 删除

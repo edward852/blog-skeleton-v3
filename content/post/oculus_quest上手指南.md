@@ -1,7 +1,7 @@
 ---
 title: "Oculus Quest上手指南"
 date: 2019-09-01T22:50:08+08:00
-lastmod: 2021-02-11T22:50:08+08:00
+lastmod: 2021-03-03T22:50:08+08:00
 draft: false
 tags: ["oculus", "quest"]
 categories: ["vr", "fun"]
@@ -30,13 +30,16 @@ OK，如果没问题，那么我们就可以从以下途径购买了：
 
 ## 科学上网 {#FQ}
 由于Oculus是Facebook公司的，因此需要科学上网才能进行激活、注册帐号、固件升级等操作。  
-方法主要有下面几种：  
+特别是Quest2，连接Wifi显示未连接网络的话，直接进行不了下一步:sweat_smile:。  
+
+解决方法主要有下面几种：  
 - 电脑科学上网 + SSTap + 共享热点  
   首先电脑打开热点，并且通过SS/SSR/v2ray/trojan任意一种客户端科学上网。  
   然后重点是SSTap创建的虚拟网卡共享给热点。  
   ![sstap share](/images/conn-sstap-share.png)   
   最后手机、Quest连接热点即可。  
   另外SSTap好久没更新了，能用是能用的，不过不喜欢的话还可以选择 [Netch](https://github.com/NetchX/Netch/releases) 。  
+  显示未连接网络的话，可以修改SSTap或Netch的模式为绕过局域网或者全局模式。  
 - FQ路由器  
   可以购买支持科学上网的路由器，比如说AC86U或者老毛子路由器。  
   AC86U可以刷梅林固件，然后在软件中心离线安装 [科学上网](https://github.com/hq450/fancyss_history_package/tree/master/fancyss_hnd) 软件。  
@@ -77,8 +80,8 @@ OK，如果没问题，那么我们就可以从以下途径购买了：
 建议还是 `Virtual Desktop` ， 效果确实是一分价钱一分货。  
 Virtual Desktop串流主要有以下步骤：  
 - PC安装 [Streamer App](https://download.vrdesktop.net/files/VirtualDesktop.Streamer.Setup.exe) 以及PC版[Oculus软件](https://www.oculus.com/download_app/?id=1582076955407037)。  
-- PC在Oculus商店购买 **Oculus Quest** 版的Virtual Desktop (20美元，可以用WELCOME25优惠券)
-- Oculus Quest通过 [SideQuest](#sq) 安装支持串流的Virtual Desktop版本
+- PC在Oculus商店购买 **Oculus Quest** 版的Virtual Desktop (20美元，可以用welcome25优惠券)
+- ~~Oculus Quest通过 [SideQuest](#sq) 安装支持串流的Virtual Desktop版本~~ (最新版本不需要这一步)
 
 然后PC和Oculus Quest在同一个局域网即可无线串流。  
 为了降低延迟，建议PC有线接入路由器，Oculus Quest接入5G Wi-Fi。  
@@ -102,6 +105,11 @@ Virtual Desktop串流主要有以下步骤：
 通过设置Quest里Wifi的HTTP代理实现科学上网的话大概率能激活，但是不能顺利升级固件版本。  
 虽然可以[手动升级](https://www.reddit.com/r/oculusquest/wiki/guides/manualupdate) ，但是帖子里面的固件没有历史版本，不一定适合你的设备升级。  
 比较靠谱的方法还是上面 [科学上网](#FQ) 部分说的，连接可以科学上网的Wifi进行升级。  
+
+# 推荐设置
+- 自动升级 关  
+- 快速透视 开  
+- Facebook隐私设置 按需调整  
 
 # FAQ
 - 为什么访问不了Oculus商店？  

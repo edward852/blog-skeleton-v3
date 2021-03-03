@@ -2,7 +2,7 @@
 title: "Golang操作protobuf"
 date: 2019-08-18T23:21:41+08:00
 lastmod: 2019-08-18T23:21:41+08:00
-draft: true
+draft: false
 tags: ["golang", "protobuf"]
 categories: ["language"]
 mathjax: false
@@ -16,6 +16,9 @@ mathjax: false
 
 # 第三方库
 使用 [github.com/gogo/protobuf](https://github.com/gogo/protobuf#installation) 提高性能。  
+
+# protoc
+在[这里](https://github.com/protocolbuffers/protobuf/releases)下载安装`protoc`。  
 
 # 调试
 - DebugString  

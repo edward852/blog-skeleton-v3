@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-02-13T11:13:04+08:00
+lastmod: 2021-02-25T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -21,8 +21,16 @@ tar -C /usr/local -xf go*.tar.gz
 然后把 `/usr/local/go/bin` 加入到 `PATH`，可以在 `~/.bash_profile` 文件加入以下内容：  
 ```sh
 export PATH=$PATH:/usr/local/go/bin
+
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
 ```
 重新登录一下或者重启之后生效。  
+另外可以设置下国内代理和`GO111MODULE`。  
+```shell
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+```
 
 # IDE
 推荐使用 [VSCode](https://code.visualstudio.com/Download) 或者 [GoLand](https://www.jetbrains.com/go/download/) 。  
@@ -32,12 +40,21 @@ export PATH=$PATH:/usr/local/go/bin
 可以参考以下教程，本文主要记录一些没讲到的或者需要注意的点。  
 另外可能需要科学上网才能访问。  
 - [A Tour of Go](https://tour.golang.org)
-- [Effective Go](https://golang.org/doc/effective_go.html) 
-- [golang构建web应用](https://github.com/astaxie/build-web-application-with-golang) 
 - [Go Data Structures](https://research.swtch.com/godata)
+- [Effective Go](https://golang.org/doc/effective_go.html) 
+- [The Go Programming Language](http://www.gopl.io)
+- [Go使用陷阱与易犯错误](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang)
+- [Go语言高级编程](https://chai2010.cn/advanced-go-programming-book)
+
+## 扩展阅读
+- [golang构建web应用](https://github.com/astaxie/build-web-application-with-golang) 
+- [Dave Cheney博客](https://dave.cheney.net)
+- [今日头条Go建千亿级微服务的实践](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2650996069&idx=1&sn=63e7f5d5f91f9d84f1c3278426f6edf6&chksm=bdbf05368ac88c20c273f325acc257811d6ee7534df30ace674f5c7eeb0c7986984dca209131&mpshare=1&scene=1&srcid=05029zVFjtQz5O69URU8Wfl6#rd)
 
 # module
 新版go已经支持module，可以通过 `go mod` 管理依赖。  
+具体参考官方说明 [Using Go Modules](https://blog.golang.org/using-go-modules)。  
+项目内部的pkg可以通过项目名+子目录路径形式导入。  
 ```sh
 go mod init 项目名
 
@@ -141,6 +158,7 @@ func sentenceFactory(str string) func(before, after string) string {
 defer后进先出，参数会先求值。  
 defer在函数退出时调用，而不是离开代码块时，因此for循环应避免使用defer。  
 defer适合就地安排收尾工作，比如说释放资源(申请和释放配对、不容易遗漏处理)。  
+另外也可以通过defer统计函数调用耗时。  
 
 # slice
 slice类似数组的引用，不存实际数据。  
@@ -160,9 +178,8 @@ a = append(a, 2, 3, 4)
 存储键值型数据，通过字面量或者`make`创建、初始化后才能使用。  
 
 # struct
-当struct内匿名嵌入一个struct字段，能够继承其所有变量和方法。  
-嵌入单个匿名struct字段类似于单继承，嵌入多个匿名struct字段则类似于多继承。  
-嵌入具名的struct字段则类似于组合。  
+当struct内匿名嵌入一个struct字段，能够拥有其所有变量和方法。  
+不管是具名嵌入还是匿名嵌入到struct，实质都是组合。  
 多态通过interface实现。  
 公有、私有控制通过symbol名称(变量名、函数名、字段名等)首字母的大小写实现。  
 
@@ -201,8 +218,10 @@ new相当于malloc+赋零值(zero value)，返回的是指针。
 ```go
 func new(Type) *Type
 ```
-make和new都是在堆上创建对象。  
-&Struct{k:v}用于初始化结构体，默认从栈上分配，但有可能逃逸到堆(比如说调用`fmt.Println`)。
+&Struct{k:v}用于初始化结构体。  
+
+make、new和&Struct{k:v}默认从栈上分配，但有可能逃逸到堆(比如说调用`fmt.Println`)。  
+具体可以参考 [Golang逃逸分析与优化](/post/golang逃逸分析与优化) 。  
 
 # JSON
 参考 [JSON操作](/post/golang操作json/) 的说明。  
