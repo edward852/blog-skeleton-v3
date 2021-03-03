@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-02-25T11:13:04+08:00
+lastmod: 2021-03-03T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -242,3 +242,9 @@ cgo尽量只调用编解码接口，不调用(外部库中)可能导致阻塞的
 
 # context
 参考 [context包](/post/golang_context包/) 的说明。  
+
+# 交叉编译
+1.5版本以后的Go交叉编译十分简单，设置`GOOS`和`GOARCH`变量即可：  
+```shell
+GOOS=linux GOARCH=amd64 go build
+```
