@@ -15,6 +15,17 @@ mathjax: false
 只是一个不开源、玩具性质、大概率亏钱的交易机器人实现思路:joy:。  
 Stellar官方有一个免费、开源的 [Kelp](https://github.com/stellar/kelp) 做市机器人，有需要的可以自行收藏、使用。  
 
+为什么选择Stellar DEX？  
+- 自己控制资产  
+  私钥自己保管，交易记录都在分布式账簿上(防篡改)。  
+  中心化交易所(如币安)只是记录在数据库，跑路或者被黑客盗窃(已经发生过)将会血本无归。  
+- 费用低  
+  基本上不超过1分钱，与交易额无关。  
+  中心化交易所都是千分之几的费率，与交易额正相关。  
+- 速度快  
+  秒级别的交易速度，比起比特币小时级别(6个确认)快多了。  
+  不过还是比中心化交易所慢一些，毕竟后者只是更新内部数据库而已。  
+
 # 参考文档
 Stellar官方[说明文档](https://developers.stellar.org/docs)以及[API文档](https://developers.stellar.org/api)。
 Go SDK参考[Horizonclient](https://pkg.go.dev/github.com/stellar/go/clients/horizonclient)和[txnbuild](https://pkg.go.dev/github.com/stellar/go/txnbuild)。  
@@ -46,8 +57,11 @@ Stellar网络本身使用费用基本可以忽略不记，所以尝试使用该�
   买单和卖单控制交易额，避免引起不必要的波动。  
 - 总额限制  
   交易机器人帐号总额达到一定程度会转账部分盈利到硬件钱包。  
+- 开机启动  
+  7x24小时自动交易的工具人  
 
 # 后记
 这个交易机器人大概率是亏钱的，不过还是交由时间和币市来验证吧~  
 后面不定期更新，看看实际效果。  
+- [210303] 开始交易 `USDC/XLM`  
 
