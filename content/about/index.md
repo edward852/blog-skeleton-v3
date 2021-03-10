@@ -6,7 +6,7 @@ comment: false
 本站当前版本(v3)由 [Hugo](https://gohugo.io/), [Even主题](https://themes.gohugo.io/hugo-theme-even/), Github Pages等生成。  
 
 # 关于我
-- 互联网后端开发 (now)
+- 互联网后端开发 ←now
 - 嵌入式软件开发
 
 # 打赏
