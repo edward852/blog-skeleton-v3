@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-03-03T11:13:04+08:00
+lastmod: 2021-03-13T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -173,6 +173,7 @@ a = append(a, 2, 3, 4)
 ```
 注意`append`不直接修改slice，而是返回新的slice，所以一般都要赋值回去。  
 另外使用`range`遍历更好，不容易出现越界问题。  
+range遍历的元素是值拷贝，更新元素内容的话需要通过索引访问。  
 
 # map
 存储键值型数据，通过字面量或者`make`创建、初始化后才能使用。  
