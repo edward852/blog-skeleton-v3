@@ -27,7 +27,7 @@ jobs:
     #- run: git config core.quotepath false
     #- run: rm -rf public || exit 0
     - run: (cd themes/even; git apply ../../theme.patch)
-    - run: ./hugo
+    - run: ./hugo --disableFastRender
     - run: npm install
     - run: npm run algolia
       env: 
