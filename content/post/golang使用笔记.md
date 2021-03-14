@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-03-13T11:13:04+08:00
+lastmod: 2021-03-14T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -39,12 +39,12 @@ go env -w GOPROXY=https://goproxy.cn,direct
 # 教程
 可以参考以下教程，本文主要记录一些没讲到的或者需要注意的点。  
 另外可能需要科学上网才能访问。  
-- [A Tour of Go](https://tour.golang.org)
-- [Go Data Structures](https://research.swtch.com/godata)
-- [Effective Go](https://golang.org/doc/effective_go.html) 
-- [The Go Programming Language](http://www.gopl.io)
-- [Go使用陷阱与易犯错误](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang)
-- [Go语言高级编程](https://chai2010.cn/advanced-go-programming-book)
+- [A Tour of Go](https://tour.golang.org)  
+- [Go Data Structures](https://research.swtch.com/godata)  
+- [Effective Go](https://golang.org/doc/effective_go.html)  
+- [The Go Programming Language](http://www.gopl.io)  
+- [Go使用陷阱与易犯错误](http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang) [(翻译版)](/post/golang常见陷阱与易犯错误)  
+- [Go语言高级编程](https://chai2010.cn/advanced-go-programming-book)  
 
 ## 扩展阅读
 - [golang构建web应用](https://github.com/astaxie/build-web-application-with-golang) 
