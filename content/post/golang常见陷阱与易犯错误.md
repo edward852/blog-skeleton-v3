@@ -317,8 +317,8 @@ mathjax: false
       fmt.Println(p.name)
   }
   
-  data1 := []field{{"one"}, {"two"}, {"three"}}  // values
-  data2 := []*field{{"one"}, {"two"}, {"three"}} // pointers
+  data1 := []field{ {"one"}, {"two"}, {"three"} }  // values
+  data2 := []*field{ {"one"}, {"two"}, {"three"} } // pointers
   
   for _, v := range data1 {
       go v.print()
@@ -454,7 +454,7 @@ mathjax: false
   var in printer = data{"two"} // 错误。 *data实现了printer接口，但是data没有
   in.print()
   
-  m := map[string]data {"x":data{"three"}}
+  m := map[string]data { "x": data{"three"} }
   m["x"].print() // 错误，map的元素不可取地址
   ```
 
@@ -466,10 +466,10 @@ mathjax: false
   type data struct {  
       name string
   }
-  m := map[string]data {"x":{"one"}}
+  m := map[string]data{ "x":{"one"} }
   m["x"].name = "two" // error
   
-  s := []data {{"one"}}
+  s := []data{ {"one"} }
   s[0].name = "two" // ok
   fmt.Println(s)    // prints: [{two}]
   ```
