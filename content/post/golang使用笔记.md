@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-03-14T11:13:04+08:00
+lastmod: 2021-03-16T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -207,6 +207,9 @@ type ReadWriter interface {
 简单来说就是不要通过加锁共享内存的方式通信，而要通过通信让渡使用权(所有权)来共用内存。  
 
 ## goroutine
+协程是golang有力的武器，使用简单、开销小。  
+需要并发或者有阻塞操作的地方都可以新开协程处理。  
+一般需要配合超时控制(context, time)和取消(channel)，避免协程不能正常退出。  
 
 ## channel
 

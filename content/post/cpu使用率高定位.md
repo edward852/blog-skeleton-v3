@@ -25,7 +25,10 @@ jvmtop.sh --profile <PID>
 ```
 
 # cpp
+带`-g`选项编译，不要`strip`符号表。  
+
 ## perf
+
 ```sh
 # 实时查看
 perf top -p <pid>
@@ -35,11 +38,11 @@ perf record -a -g -p <pid>
 perf report -g 
 ```
 `-a` 是采样所有CPU，`-g` 是采样调用关系。  
-具体可以参考 [perf使用](/post/使用perf分析性能瓶颈/) 的说明。  
+具体可以参考 [perf分析性能瓶颈](/post/使用perf分析性能瓶颈/) 的说明。  
 
 ## VTune
 如果CPU是Intel的，那么还可以使用 [VTune](https://software.intel.com/en-us/vtune/choose-download#standalone) 分析。  
-有时候perf看不出来的调用，VTune也能够继续深入查看，进而定位到问题所在。  
+实际项目经验，有时候perf看不出来的调用，VTune也能够继续深入查看，进而定位到问题所在。  
 
 # go
 ## pprof
