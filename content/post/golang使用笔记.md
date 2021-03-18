@@ -1,7 +1,7 @@
 ---
 title: "golang使用笔记"
 date: 2019-07-21T11:13:04+08:00
-lastmod: 2021-03-16T11:13:04+08:00
+lastmod: 2021-03-17T11:13:04+08:00
 draft: false
 tags: ["golang"]
 categories: ["language"]
@@ -48,7 +48,8 @@ go env -w GOPROXY=https://goproxy.cn,direct
 
 ## 扩展阅读
 - [golang构建web应用](https://github.com/astaxie/build-web-application-with-golang) 
-- [Dave Cheney博客](https://dave.cheney.net)
+- [Dave Cheney博客](https://dave.cheney.net)  
+- [Visualizing Concurrency in Go](https://divan.dev/posts/go_concurrency_visualize)  
 - [今日头条Go建千亿级微服务的实践](https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2650996069&idx=1&sn=63e7f5d5f91f9d84f1c3278426f6edf6&chksm=bdbf05368ac88c20c273f325acc257811d6ee7534df30ace674f5c7eeb0c7986984dca209131&mpshare=1&scene=1&srcid=05029zVFjtQz5O69URU8Wfl6#rd)
 
 # module
