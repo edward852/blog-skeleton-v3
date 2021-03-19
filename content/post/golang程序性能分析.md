@@ -118,7 +118,7 @@ go tool pprof -http=:8080 mem.pprof
 ```
 简单来说就是接口方法调用引用了`buf`变量，导致`buf`改为在堆上分配内存。  
 这里不讨论为什么不能分配在栈上，集中注意力在如何优化上面。  
-既然分配耗费时间，是否可以少分配操作？  
+既然分配耗费时间，是否可以减少分配操作？  
 其实readbyte使用的`buf`分配一次即可，后续可以复用。  
 ```go
 type bytereader struct {
@@ -229,6 +229,9 @@ curl -o trace.out http://127.0.0.1:8081/debug/pprof/trace?seconds=10
 拿到`trace.out`之后就可以按照之前的步骤分析了。  
 
 # 后记
+> There are only three optimizations: Do less. Do it less often. Do it faster.  
+> The largest gains come from 1, but we spend all our time on 3. -- Michael Fromberger  
+
 其实官方的Profiling Go Programs[^2]也是不错的，不过示例代码比较复杂，注意力更多集中在了代码逻辑。  
 
 # 参考资料

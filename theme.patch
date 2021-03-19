@@ -1,3 +1,32 @@
+diff --git a/assets/sass/_partial/_slideout.scss b/assets/sass/_partial/_slideout.scss
+index 58891fd..df545c1 100644
+--- a/assets/sass/_partial/_slideout.scss
++++ b/assets/sass/_partial/_slideout.scss
+@@ -9,9 +9,9 @@
+   bottom: 0;
+   width: 180px;
+   min-height: 100vh;
+-  overflow-y: hidden;
++  overflow: visible;
+   -webkit-overflow-scrolling: touch;
+-  z-index: 0;
++  z-index: 2;
+   display: none;
+ 
+   .language-selector {
+@@ -19,6 +19,12 @@
+   }
+ }
+ 
++@media screen and (max-width: 500px) {
++  .algolia-autocomplete .ds-dropdown-menu {
++    min-width: 99vw;
++  }
++}
++
+ .slideout-panel {
+   position: relative;
+   z-index: 1;
 diff --git a/assets/sass/_variables.scss b/assets/sass/_variables.scss
 index ae97a8f..1b32eab 100644
 --- a/assets/sass/_variables.scss
@@ -24,17 +53,20 @@ index 171fe09..93ed7d3 100644
  </div>
  <script>
 diff --git a/layouts/partials/head.html b/layouts/partials/head.html
-index 483339d..037d4cf 100644
+index 483339d..3930640 100644
 --- a/layouts/partials/head.html
 +++ b/layouts/partials/head.html
-@@ -89,3 +89,7 @@
-   <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
- <![endif]-->` | safeHTML }}
-+
+@@ -60,6 +60,10 @@
+   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+ {{- end -}}
+ 
 +{{- if .Site.Params.algolia.appId -}}
 +<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 +{{- end -}}
++
+ <!-- Styles -->
+ {{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
+ <link href="{{ $style.RelPermalink }}" rel="stylesheet">
 diff --git a/layouts/partials/header.html b/layouts/partials/header.html
 index 24d5b37..6590a0d 100644
 --- a/layouts/partials/header.html
@@ -52,10 +84,10 @@ index 24d5b37..6590a0d 100644
        <li class="menu-item">
          <a class="menu-item-link" href="{{ .URL | safeURL }}">{{ .Name }}</a>
 diff --git a/layouts/partials/scripts.html b/layouts/partials/scripts.html
-index 71fe659..6893dd7 100644
+index 71fe659..153de39 100644
 --- a/layouts/partials/scripts.html
 +++ b/layouts/partials/scripts.html
-@@ -133,3 +133,16 @@
+@@ -133,3 +133,23 @@
  {{ range .Site.Params.customJS -}}
    <script src="{{ "/js/" | relURL }}{{ . }}"></script>
  {{ end }}
@@ -70,5 +102,28 @@ index 71fe659..6893dd7 100644
 +       inputSelector: '.docsearch-input',
 +       debug: false,
 +   });
++   docsearch({
++       apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
++       indexName: {{ .Site.Params.algolia.indexName }},
++       appId: {{ .Site.Params.algolia.appId }},
++       inputSelector: '.mob-docsearch-input',
++       debug: false,
++   });
 +  </script>
 +{{- end -}}
+diff --git a/layouts/partials/slideout.html b/layouts/partials/slideout.html
+index da0885c..6ab4fc7 100644
+--- a/layouts/partials/slideout.html
++++ b/layouts/partials/slideout.html
+@@ -16,6 +16,11 @@
+ </div>
+ <nav id="mobile-menu" class="mobile-menu slideout-menu">
+   <ul class="mobile-menu-list">
++    {{- if .Site.Params.algolia.appId -}}
++    <li style="display:inline-block;margin-right:10px;">
++      <input type="search" class="mob-docsearch-input" placeholder="Search" />
++    </li>
++    {{- end -}}
+     {{ range .Site.Menus.main -}}
+       <a href="{{ .URL | safeURL }}">
+         <li class="mobile-menu-item">{{ .Name }}</li>

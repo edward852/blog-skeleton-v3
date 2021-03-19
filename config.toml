@@ -175,8 +175,8 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
 
   [params.reward]                                         # 文章打赏
     enable = true
-    wechat = "https://i.loli.net/2020/02/19/kJuVsB35mnEg4Z6.png"           # 微信二维码
-    alipay = "https://i.loli.net/2020/02/19/kJuVsB35mnEg4Z6.png"           # 支付宝二维码
+    wechat = "/images/qrcode.png"           # 微信二维码
+    alipay = "/images/qrcode.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
     a-email = "mailto:edward852@163.com"
