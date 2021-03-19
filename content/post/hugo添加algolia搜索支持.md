@@ -1,7 +1,7 @@
 ---
 title: "Hugo添加Algolia搜索支持"
 date: 2020-02-23T15:32:13+08:00
-lastmod: 2020-02-23T15:32:13+08:00
+lastmod: 2021-03-19T15:32:13+08:00
 draft: false
 tags: ["Algolia", "Searching", "Hugo"]
 categories: ["tutorial"]
@@ -65,8 +65,9 @@ mathjax: false
   {{- $.Scratch.Get "index" | jsonify -}}
   ```
   如果你的博文没有categories，那么 `"lvl1"` 后面的 `.Params.Categories` 可以换成其他内容。  
+  搜索文章内容`"content"`后面改用变量`.Plain`。免费版algolia记录大小有限制，不推荐这么做。  
 
-- 执行 `hugo` 命令之后，在 `public` 目录下就会生成 `algolia.json` 文件
+- 执行 `hugo` 命令(不用带参数)之后，在 `public` 目录下就会生成 `algolia.json` 文件
 
 至此，如果生成了 `algolia.json` 文件且内容正常，那么就可以继续下一步。  
 如果有问题，可以回头再仔细看看有没有什么地方漏了，也可以在下面评论反馈问题。  
@@ -131,6 +132,7 @@ mathjax: false
 # 添加前端UI
 剩下的工作就是添加搜索框了，这一步是跟主题相关的，不过其他主题应该只需要小的调整就可以了。  
 
+## 适配PC端
 - 引入CSS文件  
   在主题 `layouts/partials` 目录下的 `head.html` 中引入docsearch的CSS文件  
   ```go
@@ -145,13 +147,13 @@ mathjax: false
   {{- if .Site.Params.algolia.appId -}}
   <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   <script>
-      docsearch({
+  docsearch({
       apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
       indexName: {{ .Site.Params.algolia.indexName }},
       appId: {{ .Site.Params.algolia.appId }},
       inputSelector: '.docsearch-input',
       debug: false,
-      });
+  });
   </script>
   {{- end -}}
   ```
@@ -168,12 +170,78 @@ mathjax: false
   主要是添加 `<input>` 元素，`<li>` 元素根据各自主题的情况确定是否添加。  
   另外注意外层如果有 `overflow:hidden` 的CSS样式，可能会导致搜索结果框显示不了。:sweat_smile:   
 
+## 适配移动端 (可选)
+- 引入CSS文件  
+  docsearch的CSS文件PC端那里引入了就可以，注意加在main.scss之前。  
+  另外改动`assets/sass/_partial/_slideout.scss`文件：  
+  ```css
+  .slideout-menu {
+      position: fixed;
+      top: 0;
+      left: 0px;
+      bottom: 0;
+      width: 180px;
+      min-height: 100vh;
+      overflow: visible;                   // 这里改为visible
+      -webkit-overflow-scrolling: touch;
+      z-index: 2;                          // 这里改为2
+      display: none;
+      .language-selector {
+        padding-left: 30px;
+      }
+  }
+
+  // 这里新增
+  @media screen and (max-width: 500px) {
+      .algolia-autocomplete .ds-dropdown-menu {
+          min-width: 99vw;
+      }
+  }
+  ```
+
+- 引入JS文件并初始化  
+  加入到PC端的改动就可以了，注意`inputSelector`是`.mob-docsearch-input`：  
+  ```go
+  {{- if .Site.Params.algolia.appId -}}
+  <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+  docsearch({
+      apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
+      indexName: {{ .Site.Params.algolia.indexName }},
+      appId: {{ .Site.Params.algolia.appId }},
+      inputSelector: '.docsearch-input',
+      debug: false,
+  });
+  docsearch({
+      apiKey: {{ .Site.Params.algolia.searchOnlyKey }},
+      indexName: {{ .Site.Params.algolia.indexName }},
+      appId: {{ .Site.Params.algolia.appId }},
+      inputSelector: '.mob-docsearch-input',
+      debug: false,
+  });
+  </script>
+  {{- end -}}
+  ```
+- 添加搜索框入口  
+  在`layouts/partials/slideout.html`加入搜索框，注意class是`mob-docsearch-input`：  
+  ```go
+  {{- if .Site.Params.algolia.appId -}}
+      <li style="display:inline-block;margin-right:10px;">
+          <input type="search" class="mob-docsearch-input" placeholder="Search" />
+      </li>
+  {{- end -}}
+  ```
+
 你使用的主题不一定有上面的 `head.html`, `scripts.html`, `header.html` 文件。  
 不过没关系，主题布局是类似的，肯定可以找到对应的文件(可能分散在2个文件，甚至在同一个文件)。  
 如果实在找不到，可以在下面留言具体的Hugo主题，我后面有空可以帮忙找下。  
 
 好了，话不多说，完成上述步骤之后，千呼万唤的Algolia搜索来了！:clap: :clap: :clap:   
 ![](https://i.loli.net/2020/02/23/QVpFEs7Bg8PZYic.gif)  
+
+# 其它主题
+- maupassant  
+  改动`layouts/partials/footer.html`文件。  
 
 # 补充说明
 其实添加前端UI也可以通过Algolia的 [autocomplete.js](https://github.com/algolia/autocomplete.js) ，定制性更强，适合前端高手使用。
