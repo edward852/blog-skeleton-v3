@@ -12,6 +12,6 @@ comment: false
 # 打赏
 如果觉得博文写得不错或者对您有帮助，可以扫描下面的二维码给我打赏^_^ :smile:，谢谢！
 
-{{% center %}}
-![qrcode.png](https://i.loli.net/2020/02/19/kJuVsB35mnEg4Z6.png)
-{{% /center %}}
+<p align="center">
+    <img src="/images/qrcode.png" width="200"/>
+</p>
