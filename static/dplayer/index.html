@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DPlayer</title>
+<script src="/js/DPlayer.min.js"></script>
+</head>
+<body>
+	<div id="dplayer" style="width:1280px;height:720px"></div>
+	<script>
+	const dp = new DPlayer({
+		container: document.getElementById('dplayer'),
+    		video: {
+        		url: 'https://ipfs.io/ipfs/QmWwVorRR1GxsHKqrppue8yHHymkzqLChNE5WrwQT4Kyje?filename=E01.mkv',
+    		},
+		subtitle: {
+        		url: 'https://ipfs.io/ipfs/QmVJG2sqtWDGFw49ZnzLwnB4dvkrZ1wE2jHPfF6YaESdqg?filename=E01.vtt',
+			fontSize: '40px',
+		},
+		volume: 0.2,
+	});
+	</script>
+</body>
+</html>
