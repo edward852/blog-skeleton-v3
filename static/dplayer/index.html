@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>DPlayer</title>
-<script src="/js/DPlayer.min.js"></script>
+	<meta charset="utf-8">
+	<title>DPlayer</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+	<script src="/js/DPlayer.min.js"></script>
 </head>
+
 <body>
-	<div id="dplayer" style="width:1280px;height:720px"></div>
+	<div id="vapp">
+		<span>视频链接：</span><input v-model="videoUrl" style="width: 30%;">
+		<span>(vtt格式)字幕链接：</span><input v-model="subtitleUrl" style="width: 30%;">
+		<button v-on:click="playVideo">播放</button>
+		<div id="dplayer" style="width:1280px;height:720px"></div>
+	</div>
 	<script>
-	const dp = new DPlayer({
-		container: document.getElementById('dplayer'),
-    		video: {
-        		url: 'https://ipfs.io/ipfs/QmWwVorRR1GxsHKqrppue8yHHymkzqLChNE5WrwQT4Kyje?filename=E01.mkv',
-    		},
-		subtitle: {
-        		url: 'https://ipfs.io/ipfs/QmVJG2sqtWDGFw49ZnzLwnB4dvkrZ1wE2jHPfF6YaESdqg?filename=E01.vtt',
-			fontSize: '40px',
-		},
-		volume: 0.2,
-	});
+		var app = new Vue({
+			el: '#vapp',
+			data: {
+				videoUrl: 'https://ipfs.io/ipfs/QmWwVorRR1GxsHKqrppue8yHHymkzqLChNE5WrwQT4Kyje?filename=E01.mkv',
+				subtitleUrl: 'https://ipfs.io/ipfs/QmVJG2sqtWDGFw49ZnzLwnB4dvkrZ1wE2jHPfF6YaESdqg?filename=E01.vtt',
+			},
+			methods: {
+				playVideo: function () {
+					const dp = new DPlayer({
+						container: document.getElementById('dplayer'),
+						video: {
+							url: this.videoUrl,
+						},
+						subtitle: {
+							url: this.subtitleUrl,
+							fontSize: '40px',
+						},
+						volume: 0.2,
+						autoplay: true,
+						lang: 'zh-cn',
+						mutex: true,
+					});
+				}
+			}
+		});
 	</script>
 </body>
+
 </html>
