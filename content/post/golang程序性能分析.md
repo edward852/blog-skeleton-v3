@@ -98,7 +98,7 @@ go build
 
 go tool pprof -http=:8080 mem.pprof
 ```
-很明显`readbyte`又是罪灰祸首：  
+很明显`readbyte`又是罪魁祸首：  
 <p align="center">
     <img src="/images/readbyte_heap_escape.png" width="200" />
 </p>
